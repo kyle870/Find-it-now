@@ -62,16 +62,18 @@
                 <div class="card-title w-100 items-in-row py-3">
                     <label class="w-100 text-center m-auto text-primary font-18 text-bold">Iniciar Sesión</label>
                 </div>
+                <?php if(!empty($message)): ?>
+                    <label class="text-warning text-bold text-center font-18 w-100 py-3"><i class="fas fa-check mx-2"></i><?=$message?></label>
+                <?php endif; ?>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                     <div class="card-body row m-0">
-                        <label for="inpUsuario" class="text-black-50 text-bold font-18"><i class="fas fa-user mx-2 fh-2"></i>Usuario</label>
-                        <input id="inpUsuario" name="logUsuario" class="form-component w-100 mb-4" type="text" required>
+                        <label for="inpUsuario" class="text-black-50 text-bold font-18"><i class="fas fa-envelope mx-2 fh-2"></i>Correo</label>
+                        <input id="inpMail" name="logMail" class="form-component w-100 mb-4" type="text" required>
                         <label for="inpPassword" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Contraseña</label>
-                        <input id="inpPassword" name="logPassword" class="form-component w-100" type="password" required>
-                        
+                        <input id="inpPassword" name="logPassword" class="form-component w-100" type="password" required>                        
                     </div>
                     <div class="card-footer w-100 items-in-row py-2">
-                        <button type="submit" value="login" class="button-primary text-white text-bold mx-auto">Ingresar<i class="fas fa-sign-in-alt ml-2"></i></button>
+                        <button type="submit" value="Submit" class="button-primary text-white text-bold mx-auto">Ingresar<i class="fas fa-sign-in-alt ml-2"></i></button>
                         <p class="text-center py-2 mx-auto w-100">No tienes una cuenta? <a href="./RegistrarseManual.php" class="text-info font-weight-bold">Regístrate</a></p>
                     </div>
                 </form>                        

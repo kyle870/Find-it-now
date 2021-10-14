@@ -36,18 +36,16 @@
             </div>
             <div class="navbar-nav ml-auto">
                 <!-- Div del post del anuncio -->
-                <div class="button-primary mr-3">
+
+                <!-- <div class="button-primary mr-3">
                     <a href="./Views/CrearAnuncio.php"
-                        class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar
-                        Anuncio</a>
-                </div>
+                        class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
+                </div> -->
                 <!-- div contenedor de los botones -->
                 <div class="mr-3">
                     <div class="row button-secondary mx-auto w-100">
-                        <a href="./Views/Login.php"
-                            class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Iniciar
-                            Sesión</a>
-                        <!-- <hr class="divider-v mx-3 my-0" style="  background: #000;  border-right: 1px solid rgba(255, 255, 255);  "> -->
+                        <a href="./Views/Login.php" class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Iniciar Sesión</a>
+                        <!-- <a href="./Views/Perfil.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Jonissa</a> -->
                         <!-- <a href="./Views/RegistrarseManual.php" class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Registrarse</a> -->
                     </div>
                 </div>

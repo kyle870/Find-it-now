@@ -100,12 +100,12 @@
                     <div class="card-body row m-0 px-3">
                         <div class="col-12 mb-3">
                             <label class="text-black-50 text-bold"><i class="fas fa-sort mr-2"></i>Orden</label>
-                            <select id="select-Fechas" title="Seleccionar fecha" class="form-component-shadow w-100">
+                            <select id="select-Fechas" title="Seleccionar fecha" class="form-component w-100">
                                 <option value="Fecha de anuncio">Fecha de anuncio</option>
                                 <option value="Orden por nombre alfabetico">Orden por nombre alfabetico</option>
                             </select>
 
-                            <select id="select-Orden" title="Seleccionar orden" class="form-component-shadow w-100">
+                            <select id="select-Orden" title="Seleccionar orden" class="form-component w-100">
                                 <option value="Mayor a menor">Mayor a menor</option>
                                 <option value="Menor a mayor">Menor a mayor</option>
                             </select>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="col-12 mb-3">
                             <label for="select-Location" class="text-black-50 text-bold"><i class="fas fa-compass mr-2"></i>Ubicación</label>
-                            <select id="select-Location" title="Seleccionar locacion" class="form-component-shadow w-100">
+                            <select id="select-Location" title="Seleccionar locacion" class="form-component w-100">
                                 <option value="">Seleccione</option>
                                 <option value="1">Boaco</option>
                                 <option value="2">Carazo</option>
@@ -136,8 +136,8 @@
                         </div>
                         <div class="col-12 mb-3">
                             <label for="inpRangoPrecio" class="text-black-50 text-bold"><i class="fas fa-money-bill-wave-alt mr-2"></i>Precio (C$)</label>
-                            <div class="form-component-shadow p-1">
-                                <input id="inpRangoPrecio" type="range" class="form-control-range w-100 mb-0" min="0" max="10000" step="500" onInput="$('#rangeval').php($(this).val())">
+                            <div class="form-component p-1">
+                                <input id="inpRangoPrecio" type="range" class="form-control-range w-100 mb-0" min="0" max="10000" step="100" onInput="$('#rangeval').html($(this).val())">
                             </div>
                             <div class="col-12 row m-0 px-0">
                                 <span class="text-black-50">C$ 0</span> 
@@ -147,7 +147,7 @@
                         </div>
                         <div class="col-12 mb-3">
                             <label for="select-Estado" class="text-black-50 text-bold"><i class="fas fa-list-ul mr-2"></i>Condición</label>
-                            <select id="select-Estado" title="Seleccionar estado" class="form-component-shadow w-100">
+                            <select id="select-Estado" title="Seleccionar estado" class="form-component w-100">
                                 <option value="">Seleccione</option>
                                 <option value="1">Nuevo</option>
                                 <option value="2">Semi-nuevo</option>

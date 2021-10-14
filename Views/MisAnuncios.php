@@ -38,9 +38,9 @@
             </div>
             <div class="navbar-nav ml-auto">
                 <!-- Div del post del anuncio -->
-                <div class="button-primary mr-3">
+                <!-- <div class="button-primary mr-3">
                     <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
-                </div>
+                </div> -->
                 <!-- div contenedor de los botones -->
                 <div class="mr-3">
                     <div class="row button-secondary mx-auto w-100">

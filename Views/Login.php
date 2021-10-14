@@ -1,3 +1,7 @@
+<?php
+    require './../controllers/loginController.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -37,72 +41,43 @@
             </div>
             <div class="navbar-nav ml-auto">
                 <!-- Div del post del anuncio -->
-                <div class="button-primary mr-3">
+                <!-- <div class="button-primary mr-3">
                     <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
-                </div>
+                </div> -->
                 <!-- div contenedor de los botones -->
-                <div class="mr-3">
+                <!-- <div class="mr-3">
                     <div class="row button-secondary mx-auto w-100">
                         <a href="./Login.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Iniciar
                             Sesión</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </nav>
 
     <!--Contenido de la página-->
     <div id="fondo-Login" class="row mx-3 bg-responsive mt-5">
-        <div class="row col-12 mx-auto">
-            <div class="col-extlarg-4 col-larg-4 col-mediu-8 col-peque-8 m-auto">
-                <div class="w-100 card shadow-default">
-                    <div class="card-title w-100 items-in-row pt-3">
-                        <ul class="nav nav-tabs w-100 m-auto justify-content-center" id="myTab-Registro" role="tablist">
-                            <li class="nav-item">
-                              <a class="nav-link active text-primary font-18 text-bold" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Iniciar Sesión</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link text-primary font-18 text-bold" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Regístrate</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body row m-0 px-3">
-                        <div class="tab-content w-100">
-                            <div class="tab-pane active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                                <form>
-                                    <div class="card-body row m-0">
-                                        <label for="inpUsuario" class="text-black-50 text-bold font-18"><i class="fas fa-user mx-2 fh-2"></i>Usuario</label>
-                                        <input id="inpUsuario" class="form-component w-100 mb-4" type="text" required>
-                                        <label for="inpPassword" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Contraseña</label>
-                                        <input id="inpPassword" class="form-component w-100" type="password" required>
-                                    </div>
-                                    <div class="w-100 items-in-row py-2">
-                                        <button type="submit" class="button-primary text-white text-bold mx-auto">Ingresar<i class="fas fa-sign-in-alt ml-2"></i></button>
-                                    </div>
-                                </form>                        
-                            </div>
-                            <div class="tab-pane" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                <form>
-                                    <div class="card-body row m-0">
-                                        <label for="inpRegistroUsuario" class="text-black-50 text-bold font-18"><i class="fas fa-user mx-2"></i>Nombre de usuario</label>
-                                        <input id="inpRegistroUsuario" class="form-component w-100 mb-4" type="text" required>
-                                        <label for="inpRegistroEmail" class="text-black-50 text-bold font-18"><i class="fas fa-envelope mx-2"></i>Correo electrónico</label>
-                                        <input id="inpRegistroEmail" class="form-component w-100 mb-4" type="email" required>
-                                        <label for="inpRegistroPassword" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Contraseña</label>
-                                        <input id="inpRegistroPassword" class="form-component w-100 mb-4" type="password" required>
-                                        <label for="inpPasswordAgain" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Repetir contraseña</label>
-                                        <input id="inpPasswordAgain" class="form-component w-100" type="password" required>
-                                    </div>
-                                    <div class="w-100 items-in-row py-2">
-                                        <button type="submit" class="button-primary text-white text-bold mx-auto">Continuar<i class="fas fa-arrow-right ml-2"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-lg-4 col-md-8 col-sm-10 m-auto">
+            <div class="w-100 card shadow-default">
+                <div class="card-title w-100 items-in-row py-3">
+                    <label class="w-100 text-center m-auto text-primary font-18 text-bold">Iniciar Sesión</label>
                 </div>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                    <div class="card-body row m-0">
+                        <label for="inpUsuario" class="text-black-50 text-bold font-18"><i class="fas fa-user mx-2 fh-2"></i>Usuario</label>
+                        <input id="inpUsuario" name="logUsuario" class="form-component w-100 mb-4" type="text" required>
+                        <label for="inpPassword" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Contraseña</label>
+                        <input id="inpPassword" name="logPassword" class="form-component w-100" type="password" required>
+                        
+                    </div>
+                    <div class="card-footer w-100 items-in-row py-2">
+                        <button type="submit" value="login" class="button-primary text-white text-bold mx-auto">Ingresar<i class="fas fa-sign-in-alt ml-2"></i></button>
+                        <p class="text-center py-2 mx-auto w-100">No tienes una cuenta? <a href="./RegistrarseManual.php" class="text-info font-weight-bold">Regístrate</a></p>
+                    </div>
+                </form>                        
             </div>
         </div>
+
     </div>
     <!--Este es el pie de pagina-->
     <footer class="bg-tertiary mx-auto">
@@ -230,10 +205,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="./../Scripts/bootstrap.min.js"></script>
     <script>
-        $(function () {
-          $('#myTab-Registro li:first-child a').tab('show')
-        })
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
       </script>
 </body>
-
 </html>

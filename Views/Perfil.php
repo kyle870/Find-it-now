@@ -39,9 +39,9 @@
             <div class="navbar-nav ml-auto">
                 <!-- Div del post del anuncio -->
                 <div class="button-primary mr-3">
-                    <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
+                    <a href="./MisAnuncios.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Mis Anuncios</a>
                 </div>
-                <a href="./MisAnuncios.php" class="button-secondary text-white nav-item nav-link px-3 mr-3">Ver mis anuncios</a>
+                <a href="./../controllers/CerrarSesión.php" class="button-secondary text-white nav-item nav-link px-3 mr-3">Cerrar Sesión</a>
             </div>
         </div>
     </nav>

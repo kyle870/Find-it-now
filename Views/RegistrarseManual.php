@@ -1,3 +1,7 @@
+<?php
+    require './../controllers/register.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,7 +20,7 @@
     <link rel="shortcut icon" href="./../Resources/icono.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
-    <title>Contáctanos</title>
+    <title>Regístrate</title>
 </head>
 
 <body class="bg-default">
@@ -37,18 +41,16 @@
             </div>
             <div class="navbar-nav ml-auto">
                 <!-- Div del post del anuncio -->
-                <div class="button-primary mr-3">
+                <!-- <div class="button-primary mr-3">
                     <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
-                </div>
+                </div> -->
                 <!-- div contenedor de los botones -->
-                <div class="mr-3">
+                <!-- <div class="mr-3">
                     <div class="row button-secondary mx-auto w-100">
-                        <a href="./Login.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none pr-2 mr-2 border-right">Iniciar
+                        <a href="./Login.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Iniciar
                             Sesión</a>
-                        <!-- <hr class="divider-v mx-3 my-0" style="  background: #000;  border: 1px solid rgba(255, 255, 255, 0.816);  "> -->
-                        <a href="./RegistrarseManual.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Registrarse</a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </nav>
@@ -57,26 +59,31 @@
     <div class="row mx-0 bg-responsive mt-5">
         <div class="col-lg-4 col-md-8 col-sm-10 m-auto">
             <div class="w-100 card shadow-default">
-
-                <form>
-                    <div class="card-title w-100 items-in-row py-3">
-                        <label class="w-100 text-center m-auto text-primary font-18 text-bold">Registrarse</label>
-                    </div>
+                <div class="card-title w-100 items-in-row py-3">
+                    <label class="w-100 text-center m-auto text-primary font-18 text-bold">Registrarse</label>
+                </div>
+                <?php if(!empty($message)): ?>
+                    <label class="text-success text-bold text-center font-18 w-100 py-3"><i class="fas fa-check mx-2"></i><?=$message?></label>
+                <?php endif; ?>
+                <form id="frmRegistro" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                     <div class="card-body row m-0">
                         <label for="inpRegistroUsuario" class="text-black-50 text-bold font-18"><i class="fas fa-user mx-2"></i>Nombre de usuario</label>
-                        <input id="inpRegistroUsuario" class="form-component w-100 mb-4" type="text" required>
+                        <input id="inpRegistroUsuario" name="regUsuario" class="form-component w-100 mb-4" type="text" required>
+
                         <label for="inpRegistroEmail" class="text-black-50 text-bold font-18"><i class="fas fa-envelope mx-2"></i>Correo electrónico</label>
-                        <input id="inpRegistroEmail" class="form-component w-100 mb-4" type="email" required>
+                        <input id="inpRegistroEmail" name="regEmail" class="form-component w-100 mb-4" type="email" required>
+                        
                         <label for="inpRegistroPassword" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Contraseña</label>
-                        <input id="inpRegistroPassword" class="form-component w-100 mb-4" type="password" required>
+                        <input id="inpRegistroPassword" name="regPassword" class="form-component w-100 mb-4" type="password" required>
+                        
                         <label for="inpPasswordAgain" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Repetir contraseña</label>
-                        <input id="inpPasswordAgain" class="form-component w-100" type="password" required>
+                        <input id="inpPasswordAgain" name="regPasswordAgain" class="form-component w-100" type="password" required>
                     </div>
                     <div class="card-footer w-100 items-in-row py-2">
-                        <button type="submit" class="button-primary text-white text-bold mx-auto">Continuar<i class="fas fa-arrow-right ml-2"></i></button>
+                        <button type="submit" value="Submit" class="button-primary text-white text-bold mx-auto">Enviar Datos<i class="fas fa-arrow-right ml-2"></i></button>
+                        <p class="text-center py-2 mx-auto w-100">Ya tienes una cuenta? <a href="./Login.php" class="text-info font-weight-bold">Inicia Sesión</a></p>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -205,6 +212,11 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="./../Scripts/bootstrap.min.js"></script>
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
 </body>
 
 </html>

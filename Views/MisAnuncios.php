@@ -1,3 +1,7 @@
+<?php 
+    require_once './../config/connection.php';
+    require_once './../controllers/sesionActiva.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 

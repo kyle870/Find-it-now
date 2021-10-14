@@ -1,19 +1,6 @@
-<?php 
-    session_start();
+<?php
     require_once './config/connection.php';
-
-    if (isset($_SESSION['user_id'])) {
-        $records = $conn->prepare('SELECT id, nombre_usuario, contraseña, correo FROM accounts WHERE id = :id');
-        $records->bindParam(':id', $_SESSION['user_id']);
-        $records->execute();
-        $results = $records->fetch(PDO::FETCH_ASSOC);
-
-        $user = null;
-
-        if (count($results)>0) {
-            $user = $results;
-        }
-    }
+    require_once './controllers/sesionActiva.php';
 ?>
 
 <!DOCTYPE html>
@@ -55,26 +42,20 @@
             <div class="navbar-nav ml-auto">
                 <!-- Div del post del anuncio -->
                 <?php if(!empty($user)): ?>
-                    <div class="button-primary mr-3">
-                    <a href="./Views/Perfil.php"
-                        class="bg-transparent text-nowrap text-white text-decoration-none hover-none"><?= $user['nombre_usuario']; ?></a>
-                    </div>
-                    <!-- div contenedor de los botones -->
-                    <div class="mr-3">
-                        <div class="row button-secondary mx-auto w-100">
-                            <a href="./controllers/cerrarSesion.php" class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Cerrar Sesión</a>
-                        </div>
-                    </div>
-                <?php else: ?>
                     <!-- <div class="button-primary mr-3">
-                    <a href="./Views/CrearAnuncio.php"
-                        class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
+                    <a href="./Views/Perfil.php"
+                        class="bg-transparent text-nowrap text-white text-decoration-none hover-none"></a>
                     </div> -->
                     <!-- div contenedor de los botones -->
                     <div class="mr-3">
                         <div class="row button-secondary mx-auto w-100">
-                            <a href="./Views/Login.php" class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Iniciar Sesión</a>
+                            <a href="./Views/Perfil.php" class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none"><?= $user['nombre_usuario']; ?></a>
                         </div>
+                    </div>
+                <?php else: ?>
+                    <div class="button-secondary mr-3">
+                    <a href="./Views/Login.php"
+                        class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Iniciar Sesión</a>
                     </div>
                 <?php endif; ?>
             </div>

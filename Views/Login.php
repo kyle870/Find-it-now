@@ -63,12 +63,12 @@
                     <label class="w-100 text-center m-auto text-primary font-18 text-bold">Iniciar Sesión</label>
                 </div>
                 <?php if(!empty($message)): ?>
-                    <label class="text-warning text-bold text-center font-18 w-100 py-3"><i class="fas fa-check mx-2"></i><?=$message?></label>
+                    <label class="text-warning text-bold text-center font-18 w-100 pt-3 m-0"><i class="fas fa-check mx-2"></i><?=$message?></label>
                 <?php endif; ?>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                     <div class="card-body row m-0">
                         <label for="inpUsuario" class="text-black-50 text-bold font-18"><i class="fas fa-envelope mx-2 fh-2"></i>Correo</label>
-                        <input id="inpMail" name="logMail" class="form-component w-100 mb-4" type="text" required>
+                        <input id="inpMail" name="logMail" class="form-component w-100 mb-4" type="email" required>
                         <label for="inpPassword" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Contraseña</label>
                         <input id="inpPassword" name="logPassword" class="form-component w-100" type="password" required>                        
                     </div>

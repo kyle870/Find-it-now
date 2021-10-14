@@ -27,7 +27,7 @@
         $resultados = $records->fetch(PDO::FETCH_ASSOC);
         $total_records = $records->rowcount();
 
-        if ($total_records > 0) {
+        if ($total_records > 0 && password_verify($logContrasena, $resultados['contraseña'])) {
             $_SESSION['user_id'] = $resultados['id'];
             header('location: ./../index.php');
         }else{

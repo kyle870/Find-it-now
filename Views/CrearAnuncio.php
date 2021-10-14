@@ -1,3 +1,7 @@
+<?php 
+    require_once './../config/connection.php';
+    require_once './../controllers/sesionActiva.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -40,12 +44,19 @@
                 <a href="./Contactanos.php" class="nav-item nav-link text-white">Contáctanos</a>
             </div>
             <div class="navbar-nav ml-auto">
-                <!-- Div del post del anuncio -->
-                <div class="button-primary mr-3">
-                    <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
-                </div>
-                <a href="./Perfil.php" class="button-secondary text-white nav-item nav-link px-3 mr-3">Jonissa María
-                    Alfaro Carrión</a>
+                <?php if(!empty($user)): ?>
+                <!-- div contenedor de los botones -->
+                    <div class="mr-3">
+                        <div class="row button-secondary mx-auto w-100">
+                            <a href="./Perfil.php" class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none"><?= $user['nombre_usuario']; ?></a>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="button-secondary mr-3">
+                    <a href="./Login.php"
+                        class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Iniciar Sesión</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </nav>

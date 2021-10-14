@@ -1,3 +1,7 @@
+<?php 
+    require_once './../config/connection.php';
+    require_once './../controllers/sesionActiva.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -41,7 +45,8 @@
                 <div class="button-primary mr-3">
                     <a href="./MisAnuncios.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Mis Anuncios</a>
                 </div>
-                <a href="./../controllers/CerrarSesión.php" class="button-secondary text-white nav-item nav-link px-3 mr-3">Cerrar Sesión</a>
+                <a href="./../controllers/cerrarSesion.php" class="button-secondary text-white nav-item nav-link px-3 mr-3">Cerrar Sesión</a>
+        
             </div>
         </div>
     </nav>

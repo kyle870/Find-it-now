@@ -1,3 +1,7 @@
+<?php 
+    require_once './../config/connection.php';
+    require_once './../controllers/sesionActiva.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -38,17 +42,24 @@
             </div>
             <div class="navbar-nav ml-auto">
                 <!-- Div del post del anuncio -->
-                <div class="button-primary mr-3">
-                    <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
-                </div>
-                <!-- div contenedor de los botones -->
-                <div class="mr-3">
-                    <div class="row button-secondary mx-auto w-100">
-                        <a href="./Login.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Iniciar
-                            Sesión</a>
-                        <!-- <a href="./RegistrarseManual.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Registrarse</a> -->
+                <?php if(!empty($user)): ?>
+                    <div class="button-primary mr-3">
+                    <a href="./../Views/CrearAnuncio.php"
+                        class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
                     </div>
-                </div>
+                    <!-- div contenedor de los botones -->
+                    <div class="mr-3">
+                        <div class="row button-secondary mx-auto w-100">
+                            <a href="./../Views/Perfil.php" class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none"><?= $user['nombre_usuario']; ?></a>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="mr-3">
+                        <div class="row button-secondary mx-auto w-100">
+                            <a href="./../Views/Login.php" class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Iniciar Sesión</a>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </nav>

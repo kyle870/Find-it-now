@@ -40,17 +40,6 @@
                 <a href="./Contactanos.php" class="nav-item nav-link text-white">Contáctanos</a>
             </div>
             <div class="navbar-nav ml-auto">
-                <!-- Div del post del anuncio -->
-                <!-- <div class="button-primary mr-3">
-                    <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
-                </div> -->
-                <!-- div contenedor de los botones -->
-                <!-- <div class="mr-3">
-                    <div class="row button-secondary mx-auto w-100">
-                        <a href="./Login.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Iniciar
-                            Sesión</a>
-                    </div>
-                </div> -->
             </div>
         </div>
     </nav>
@@ -58,8 +47,8 @@
     <!--Contenido de la página-->
     <div id="fondo-Login" class="row mx-3 bg-responsive mt-5">
         <div class="col-lg-4 col-md-8 col-sm-10 m-auto">
-            <div class="w-100 card shadow-default">
-                <div class="card-title w-100 items-in-row py-3">
+            <div id="card-login" class="w-100 card shadow-default ">
+                <div id="title-login" class="card-title w-100 items-in-row py-3">
                     <label class="w-100 text-center m-auto text-primary font-18 text-bold">Iniciar Sesión</label>
                 </div>
                 <?php if(!empty($message)): ?>
@@ -74,7 +63,8 @@
                     </div>
                     <div class="card-footer w-100 items-in-row py-2">
                         <button type="submit" value="Submit" class="button-primary text-white text-bold mx-auto">Ingresar<i class="fas fa-sign-in-alt ml-2"></i></button>
-                        <p class="text-center py-2 mx-auto w-100">No tienes una cuenta? <a href="./RegistrarseManual.php" class="text-info font-weight-bold">Regístrate</a></p>
+                        <p class="text-center py-2 mb-0 mx-auto w-100">No tienes una cuenta? <a href="./RegistrarseManual.php" class="text-info font-weight-bold">Regístrate</a></p>
+                        <p class="text-center my-0 mx-auto w-100"><a href="#" class="text-info font-weight-bold">Olvidaste tu contraseña ?</a></p>
                     </div>
                 </form>                        
             </div>

@@ -81,11 +81,16 @@ require_once './../controllers/sesionActiva.php';
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="btnGroup-profile" class="row justify-content-center py-3 my-auto mx-auto">
+                                        <button id="primary_profile-btn" type="button" onclick="defaultBtnActive()" class="btn btn-success text-white cursor-pointer  font-weight-bold m-2"><i class="fas fa-cloud-upload-alt mx-2"></i>Cargar</button>
+                                        <input id="default-btn" type="file" accept="image/*" hidden>
+                                        <button id="cancel-profile-btn" class="btn btn-outline-danger cursor-pointer  font-weight-bold m-2"><i class="fas fa-trash mx-2"></i>Eliminar</button>
+                                    </div>
                                 </div>
 
                                 <div id="desc-persona" class="row col-lg-8 col-md-6 col-sm-12 mx-auto">
                                     <div class="py-0 w-100 h-100">
-                                        <textarea disabled id="txtDescript" class="form-component text-justify m-0 w-100" placeholder="Breve descripción de tu persona..."></textarea>
+                                        <textarea id="txtDescript" class="form-component text-justify m-0 w-100" placeholder="Breve descripción de tu persona..."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -103,25 +108,25 @@ require_once './../controllers/sesionActiva.php';
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="claseNombre">
                                         <label for="inpNombre" class="text-black-50 text-bold"><i class="fas fa-font-case mr-2"></i>Nombre Completo</label>
-                                        <input disabled id="inpNombre" class="form-component w-100 mb-4" value="<?= $user['nombre_usuario']; ?>">
+                                        <input id="inpNombre" class="form-component w-100 mb-4">
                                     </div>
                                     <div class="claseFecha">
                                         <label for="inpFecha" class="text-black-50 text-bold"><i class="fas fa-calendar-alt mr-2"></i>Fecha de Nacimiento</label>
-                                        <input disabled id="inpFecha" type="date" class="form-component w-100 mb-4">
+                                        <input id="inpFecha" type="date" class="form-component w-100 mb-4">
                                     </div>
                                     <div class="claseCelular">
                                         <label for="inpCelular" class="text-black-50 text-bold"><i class="fas fa-phone mr-2"></i>Teléfono Celular</label>
-                                        <input disabled id="inpCelular" class="form-component w-100 mb-4">
+                                        <input id="inpCelular" class="form-component w-100 mb-4">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="claseCorreo">
                                         <label for="inpCorreo" class="text-black-50 text-bold"><i class="fas fa-envelope mr-2"></i>Correo</label>
-                                        <input disabled id="inpCorreo" type="email" class="form-component w-100 mb-4" value="<?= $user['correo']; ?>">
+                                        <input id="inpCorreo" type="email" class="form-component w-100 mb-4">
                                     </div>
                                     <div class="claseDepartamento">
                                         <label for="selectorDepartamento" class="text-black-50 text-bold"><i class="fas fa-map-marker-alt mr-2"></i>Departamento</label>
-                                        <select disabled id="selectorDepartamento" class="form-component w-100 mb-4">
+                                        <select id="selectorDepartamento" class="form-component w-100 mb-4">
                                             <option value="">Seleccione</option>
                                             <option value="1">Boaco</option>
                                             <option value="2">Carazo</option>
@@ -144,12 +149,20 @@ require_once './../controllers/sesionActiva.php';
                                     </div>
                                     <div class="claseGenero">
                                         <label for="selectorGenero" class="text-black-50 text-bold"><i class="fas fa-venus-mars mr-2"></i>Género</label>
-                                        <select disabled id="selectorGenero" class="form-component align-middle w-100 mb-4">
+                                        <select id="selectorGenero" class="form-component align-middle w-100 mb-4">
                                             <option value="">Seleccione</option>
                                             <option value="1">Hombre</option>
                                             <option value="2">Mujer</option>
                                         </select>
                                     </div>
+                                </div>
+                                <!-- Administración de la contraseña -->
+                                <div class="card-title w-100 items-in-row py-3">
+                                    <label class="w-100 text-center m-auto font-18 text-bold">Administración de la cuenta</label>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-info cursor-pointer  font-weight-bold m-2"><a href="./actualizarContrasena.php" class="text-white text-decoration-none">Cambiar contraseña</a></button>
+                                    <a href="./../controllers/eliminarCuenta.php" class="btn btn-outline-danger font-weight-bold m-2" role="button" onclick="return confirm('Seguro que desea eliminar la cuenta?')">Eliminar cuenta</a>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +173,8 @@ require_once './../controllers/sesionActiva.php';
     </div>
     <div id="contenedor-botones" class="row mx-auto">
         <div id="contenedor" class="row d-flex justify-content-center mx-auto pb-3">
-            <button id="btn-editar-perfil" class="button-primary text-white cursor-pointer mx-5 font-weight-bold px-4"><i class="fas fa-user-edit mr-3"></i> <a href="./editarPerfil.php" class="text-white text-decoration-none">Editar</a></button>
+            <button id="btn-guardar-perfil" class="button-save text-white cursor-pointer mx-5 font-weight-bold"><i class="fas fa-save mr-3"></i>Guardar</button>
+            <button id="btn-deshacer-perfil" class="button-cancel text-white cursor-pointer mx-5 font-weight-bold"><i class="fas fa-redo mr-3"></i><a href="./Perfil.php" class="text-white text-decoration-none">Deshacer</a></button>
         </div>
     </div>
     </div>

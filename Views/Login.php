@@ -64,7 +64,7 @@
                     <div class="card-footer w-100 items-in-row py-2">
                         <button type="submit" value="Submit" class="button-primary text-white text-bold mx-auto">Ingresar<i class="fas fa-sign-in-alt ml-2"></i></button>
                         <p class="text-center py-2 mb-0 mx-auto w-100">No tienes una cuenta? <a href="./RegistrarseManual.php" class="text-info font-weight-bold">Regístrate</a></p>
-                        <p class="text-center my-0 mx-auto w-100"><a href="#" class="text-info font-weight-bold">Olvidaste tu contraseña ?</a></p>
+                        <p class="text-center my-0 mx-auto w-100"><a href="./reestablecerContrasena.php" class="text-info font-weight-bold">Olvidaste tu contraseña ?</a></p>
                     </div>
                 </form>                        
             </div>

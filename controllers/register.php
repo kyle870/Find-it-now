@@ -97,7 +97,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         //parámetros
         $stmt->bindParam(':usuario', $nombreUsuario);
-        $password = password_hash($passwordUsuario, PASSWORD_BCRYPT);
+        //$password = password_hash($passwordUsuario, PASSWORD_BCRYPT);
+        $password = md5($passwordUsuario);
         $stmt->bindParam(':regpassword', $password);
         $stmt->bindParam(':email', $emailUsuario);
 

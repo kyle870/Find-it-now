@@ -76,7 +76,8 @@
                     </div>
                     <div class="card-footer w-100 items-in-row justify-content-center py-2">
                         <button id="btnUpdatePassword" value="Submit" type="Submit" class="btn btn-success text-white cursor-pointer  font-weight-bold m-2"><i class="fas fa-sync-alt mx-2"></i>Cambiar</button>
-                        <button id="btnResetPassword" value="Submit" class=" btn btn-link cursor-pointer  font-weight-bold m-2">Olvidé mi contraseña</button>
+                        <!-- <button id="btnResetPassword" value="Submit" class=" btn btn-link cursor-pointer  font-weight-bold m-2">Olvidé mi contraseña</button> -->
+                        <a href="./reestablecerContrasena.php" class="btn btn-link cursor-pointer font-weight-bold m-2" role="button">Olvidé mi contraseña</a>
                     </div>
                 </form>
                 <a href="./editarPerfil.php" class="btn btn-outline-secondary font-weight-bold m-2" role="button"><i class="fas fa-arrow-left mx-2"></i>Regresar</a>

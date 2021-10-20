@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //validar vieja contrasena
     if (empty(trim($inpContrasena))) {
         $contrasenaError = 'Por favor, ingresa tu actual contraseña';
-    } elseif ($total > 0 && password_verify($inpContrasena, $resultados['contrasena'])) {
+    } elseif ($total > 0 && md5($inpContrasena, $resultados['contrasena'])) {
         $_SESSION['user_id'] = $resultados['id'];
     } else {
         $contrasenaError = 'La contraseña actual no coicide';
@@ -67,7 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         //parámetros
         $stmt->bindParam(':sessionID',$idUsuario); //interpolacion del usuarioID
-        $password = password_hash($inpNuevaContrasena, PASSWORD_BCRYPT);
+        //$password = password_hash($inpNuevaContrasena, PASSWORD_BCRYPT);
+        $password = md5($inpNuevaContrasena);
         $stmt->bindParam(':nuevaContrasena', $password);
 
         if ($stmt->execute()) {

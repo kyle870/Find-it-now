@@ -29,7 +29,7 @@ if (!empty($_POST['logMail']) && !empty($_POST['logPassword'])) {
     $resultados = $records->fetch(PDO::FETCH_ASSOC);
     $total_records = $records->rowcount();
 
-    if ($total_records > 0 && password_verify($logContrasena, $resultados['contrasena'])) {
+    if ($total_records > 0 && md5($logContrasena, $resultados['contrasena'])) {
         if ( $resultados['activo'] == 1) {
             $_SESSION['user_id'] = $resultados['id'];
             header('location: ./../index.php');

@@ -31,10 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $total = $records->rowCount();
 
 
-    //validar vieja contraseña
+    //validar vieja contrasena
     if (empty(trim($inpContrasena))) {
         $contrasenaError = 'Por favor, ingresa tu actual contraseña';
-    } elseif ($total > 0 && password_verify($inpContrasena, $resultados['contraseña'])) {
+    } elseif ($total > 0 && password_verify($inpContrasena, $resultados['contrasena'])) {
         $_SESSION['user_id'] = $resultados['id'];
     } else {
         $contrasenaError = 'La contraseña actual no coicide';

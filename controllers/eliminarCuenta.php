@@ -4,7 +4,7 @@ session_start();
 require_once './../config/connection.php';
 require_once './../query/allquery.php';
 //preparar SQL
-$stmt = $conn->prepare($deleteGeneric);
+$stmt = $conn->prepare($deleteAccount);
 
 //tomar parametros
 $stmt->bindParam('sessionID', $_SESSION['user_id']);

@@ -4,15 +4,19 @@ require_once './../config/connection.php';
 require_once './../query/allquery.php';
 //set variables de usuario como vacías
 $nombreUsuario = $passwordUsuario = $repPassword = $emailUsuario = "";
-$usuarioError = $contrasenaError = $confContrasenaError = $emailError ="";
+$usuarioError = $contrasenaError = $confContrasenaError = $emailError = "";
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //varaibles globales
+    //varaibles del post
     $nombreUsuario = $_POST['regUsuario'];
+    $emailUsuario = $_POST['regEmail'];
     $passwordUsuario = $_POST['regPassword'];
     $repPassword = $_POST['regPasswordAgain'];
-    $emailUsuario = $_POST['regEmail'];
+
+    //variables de conexion SQL
+    $selector_id =  $conn->prepare($idSelect);
+    $selector_correo = $conn->prepare($emailSelect);
 
     //validar el usuario
     if (empty(trim($nombreUsuario))) {
@@ -21,19 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!preg_match('/^[a-zA-Z0-9_]+$/', trim($nombreUsuario))) {
         $usuarioError = 'El usuario sólo debe tener letras, números o guión bajo';
     } else {
-        // Prepare a select statement
-        //$sql = $idSelect;
 
-        if ($stmt = $conn->prepare($idSelect)) {
+        if ($selector_id) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":usuario", $nombreUsuario, PDO::PARAM_STR);
-
-            // set parametros
-            $nombreUsuario = trim($nombreUsuario);
+            $selector_id->bindParam(":usuario", $nombreUsuario, PDO::PARAM_STR);
 
             // preparar la ejecución
-            if ($stmt->execute()) {
-                if ($stmt->rowCount() == 1) {
+            if ($selector_id->execute()) {
+                if ($selector_id->rowCount() == 1) {
                     $usuarioError = 'Este nombre de usuario ya existe';
                 } else {
                     $nombreUsuario = trim($nombreUsuario);
@@ -42,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $message = 'Algo salió mal, intenta nuevamente';
             }
             // Close statement
-            unset($stmt);
+            unset($selector_id);
         }
     }
 
@@ -50,20 +49,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty(trim($emailUsuario))) {
         $emailError = 'Por favor ingresa un correo';
     } else {
-        // Prepare a select statement about email
-        //$sql = $emailSelect;
-
-        if ($stmt = $conn->prepare($emailSelect)) {
-            $stmt->bindParam(":correo", $emailUsuario, PDO::PARAM_STR);
-
-            // set parametros
-            $emailUsuario = trim($emailUsuario);
+        if ($selector_correo) {
+            $selector_correo->bindParam(":email", $emailUsuario, PDO::PARAM_STR);
 
             // preparar la ejecución
-            if ($stmt->execute()) {
-                //si en las filas hay un correo que tenga ese misom del input
-                if ($stmt->rowCount() > 0) {
-                    $emailError = 'Este correo ya tiene una cuenta creada';
+            if ($selector_correo->execute()) {
+                //obtener filas
+                $resultados = $selector_correo->fetch(PDO::FETCH_ASSOC);
+                $total_resultados = $selector_correo->rowCount();
+
+                //si en las filas hay una cuenta que contenga el mismo correo
+                if ($total_resultados > 0 && $resultados['activo'] == 1) {
+                    $emailError = 'Ya existe una cuenta usando este correo';
                 } else {
                     $emailUsuario = trim($emailUsuario);
                 }
@@ -71,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $message = 'Algo salió mal, intenta nuevamente';
             }
             // Close statement
-            unset($stmt);
+            unset($selector_correo);
         }
     }
 
@@ -95,9 +92,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($usuarioError) && empty($contrasenaError) && empty($confContrasenaError) && empty($emailError)) {
-        # codigo para insert sql
-        //$sql = $insertNewUser;
-
         //ocupar una variable statement para enviar el sql a la conexion
         $stmt = $conn->prepare($insertNewUser);
 
@@ -116,4 +110,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     unset($pdo);
 }
-?>

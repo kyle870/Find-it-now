@@ -79,7 +79,7 @@ require './../controllers/register.php';
                         <?php endif; ?>
                     </div>
                     <div class="card-footer w-100 items-in-row py-2">
-                        <button type="submit" value="Submit" class="button-primary text-white text-bold mx-auto">Enviar Datos<i class="fas fa-arrow-right ml-2"></i></button>
+                        <button type="submit" value="Submit" class="button-primary text-white text-bold mx-auto">Registrar<i class="fas fa-arrow-right ml-2"></i></button>
                         <p class="text-center py-2 mx-auto w-100">Ya tienes una cuenta? <a href="./Login.php" class="text-info font-weight-bold">Inicia Sesión</a></p>
                     </div>
                 </form>

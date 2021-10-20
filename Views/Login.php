@@ -52,7 +52,7 @@
                     <label class="w-100 text-center m-auto text-primary font-18 text-bold">Iniciar Sesión</label>
                 </div>
                 <?php if(!empty($message)): ?>
-                    <label class="text-warning text-bold text-center font-18 w-100 pt-3 m-0"><i class="fas fa-check mx-2"></i><?=$message?></label>
+                    <label class="text-danger text-bold text-center font-18 w-100 pt-3 m-0"><i class="fas fa-exclamation-triangle mx-2"></i><?=$message?></label>
                 <?php endif; ?>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                     <div class="card-body row m-0">

@@ -47,8 +47,8 @@
     <!--Contenido de la página-->
     <div id="fondo-Login" class="row mx-3 bg-responsive mt-5">
         <div class="col-lg-4 col-md-8 col-sm-10 m-auto">
-            <div id="card-login" class="w-100 card shadow-default ">
-                <div id="title-login" class="card-title w-100 items-in-row py-3">
+            <div class="w-100 card shadow-default">
+                <div class="card-title w-100 items-in-row py-3">
                     <label class="w-100 text-center m-auto text-primary font-18 text-bold">Iniciar Sesión</label>
                 </div>
                 <?php if(!empty($message)): ?>

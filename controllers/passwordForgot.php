@@ -55,6 +55,7 @@ if (isset($_POST['userEmail'])) {
         $link = 'http://localhost/finditnow/controllers/passwordReset.php?i=' . $user['id'] . '&h=' . $hash;
 
         //Agregar destinatario
+        //$mail->From = 'Admin <osmarquintero87@gmail.com>';
         $mail->AddAddress($user['correo']);
         $mail->Subject = 'Restablecimiento de contrasena';
         $mail->Body = "<a href='$link'>Enlace para restablecer contraseña</a>";;

@@ -29,16 +29,20 @@ if (!empty($_POST['logMail']) && !empty($_POST['logPassword'])) {
     $resultados = $records->fetch(PDO::FETCH_ASSOC);
     $total_records = $records->rowcount();
 
-    if ($total_records > 0 && md5($logContrasena, $resultados['contrasena'])) {
-        if ( $resultados['activo'] == 1) {
+    //verificar si es un md5 válido
+    function isValidMd5($md5 = '')
+    {
+        return preg_match('/^[a-f0-9]{32}$/', $md5);
+    }
+
+    if ($total_records > 0 && (md5($logContrasena) == $resultados['contrasena'] || $logContrasena == $resultados['contrasena'])) {
+        if ($resultados['activo'] == 1) {
             $_SESSION['user_id'] = $resultados['id'];
             header('location: ./../index.php');
-        }else{
+        } else {
             $message = 'Los datos no están asociados a una cuenta';
-            //$message = '<label class="text-warning text-bold text-center font-18 w-100 pt-3 m-0"><i class="fas fa-exclamation-triangle mx-2"></i>Los datos no están asociados a una cuenta</label>';
         }
     } else {
         $message = 'Los datos no coinciden';
-        //$message = '<label class="text-warning text-bold text-center font-18 w-100 pt-3 m-0"><i class="fas fa-exclamation-triangle mx-2"></i>Los datos no coinciden</label>';
     }
 }

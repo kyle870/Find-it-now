@@ -30,11 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resultados = $records->fetch(PDO::FETCH_ASSOC);
     $total = $records->rowCount();
 
+    //verificar si es un md5
+    function isValidMd5($md5 = '')
+    {
+        return preg_match('/^[a-f0-9]{32}$/', $md5);
+    }
 
     //validar vieja contrasena
     if (empty(trim($inpContrasena))) {
         $contrasenaError = 'Por favor, ingresa tu actual contraseña';
-    } elseif ($total > 0 && md5($inpContrasena, $resultados['contrasena'])) {
+    } elseif ($total > 0 && (md5($inpContrasena) == $resultados['contrasena'] ||$inpContrasena == $resultados['contrasena'])) {
         $_SESSION['user_id'] = $resultados['id'];
     } else {
         $contrasenaError = 'La contraseña actual no coicide';

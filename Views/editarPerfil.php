@@ -64,7 +64,7 @@ require_once './../controllers/sesionActiva.php';
                             </div>
                             <div id="cardBodyProfile" class="card-body row m-0 px-3">
 
-                                <div class="row m-0 col-lg-4 col-md-6 col-sm-12 ">
+                                <div class="row mx-auto m-0 col-lg-4 col-md-6 col-sm-12 ">
                                     <div id="container-profile" class="container px-0 ">
                                         <div id="wrapper-profile" class="wrapper w-100 h-100 ">
                                             <!---Elementos para subir la imagen-->
@@ -88,11 +88,11 @@ require_once './../controllers/sesionActiva.php';
                                     </div>
                                 </div>
 
-                                <div id="desc-persona" class="row col-lg-8 col-md-6 col-sm-12 mx-auto">
+                                <!-- <div id="desc-persona" class="row col-lg-8 col-md-6 col-sm-12 mx-auto">
                                     <div class="py-0 w-100 h-100">
                                         <textarea id="txtDescript" class="form-component text-justify m-0 w-100" placeholder="Breve descripción de tu persona..."></textarea>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

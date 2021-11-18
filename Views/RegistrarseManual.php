@@ -18,7 +18,7 @@ require './../controllers/register.php';
     <link rel="stylesheet" href="./../Style/sizes.css">
     <link rel="stylesheet" href="./../Style/bootstrap.min.css">
     <link rel="shortcut icon" href="./../Resources/icono.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <title>Regístrate</title>
 </head>
@@ -44,7 +44,7 @@ require './../controllers/register.php';
 
     <!--Contenido de la página-->
     <div class="row mx-0 bg-responsive mt-5">
-        <div class="col-lg-4 col-md-8 col-sm-10 m-auto">
+        <div class="col-10 m-auto">
             <div class="w-100 card shadow-default">
                 <div class="card-title w-100 items-in-row py-3">
                     <label class="w-100 text-center m-auto text-primary font-18 text-bold">Registrarse</label>
@@ -54,29 +54,76 @@ require './../controllers/register.php';
                 <?php endif; ?>
                 <form id="frmRegistro" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                     <div class="card-body row m-0">
-                        <label for="inpRegistroUsuario" class="text-black-50 text-bold font-18"><i class="fas fa-user mx-2"></i>Nombre de usuario</label>
-                        <input id="inpRegistroUsuario" name="regUsuario" class="form-component w-100 mb-4" type="text" required>
-                        <?php if (!empty($usuarioError)) : ?>
-                            <label class="text-danger text-bold text-center font-12 w-100 pb-3 my-0"><i class="fas fa-exclamation mx-2"></i><?= $usuarioError ?></label>
-                        <?php endif; ?>
+                        <div class="col-lg-6 col-md-6 col-sm-12 border-right">
+                            <label for="inpRegistroUsuario" class="text-black-50 text-bold font-18"><i class="fas fa-user mx-2"></i>Nombre de usuario</label>
+                            <input id="inpRegistroUsuario" name="regUsuario" class="form-component w-100 mb-4" type="text" required>
+                            <?php if (!empty($usuarioError)) : ?>
+                                <label class="text-danger text-bold text-center font-12 w-100 pb-3 my-0"><i class="fas fa-exclamation mx-2"></i><?= $usuarioError ?></label>
+                            <?php endif; ?>
 
-                        <label for="inpRegistroEmail" class="text-black-50 text-bold font-18"><i class="fas fa-envelope mx-2"></i>Correo electrónico</label>
-                        <input id="inpRegistroEmail" name="regEmail" class="form-component w-100 mb-4" type="email" required>
-                        <?php if (!empty($emailError)) : ?>
-                            <label class="text-danger text-bold text-center font-12 w-100 pb-3 my-0"><i class="fas fa-exclamation mx-2"></i><?= $emailError ?></label>
-                        <?php endif; ?>
+                            <label for="inpRegistroEmail" class="text-black-50 text-bold font-18"><i class="fas fa-envelope mx-2"></i>Correo electrónico</label>
+                            <input id="inpRegistroEmail" name="regEmail" class="form-component w-100 mb-4" type="email" required>
+                            <?php if (!empty($emailError)) : ?>
+                                <label class="text-danger text-bold text-center font-12 w-100 pb-3 my-0"><i class="fas fa-exclamation mx-2"></i><?= $emailError ?></label>
+                            <?php endif; ?>
 
-                        <label for="inpRegistroPassword" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Contraseña</label>
-                        <input id="inpRegistroPassword" name="regPassword" class="form-component w-100 mb-4" type="password" required>
-                        <?php if (!empty($contrasenaError)) : ?>
-                            <label class="text-danger text-bold text-center font-12 w-100 pb-3 my-0"><i class="fas fa-exclamation mx-2"></i><?= $contrasenaError ?></label>
-                        <?php endif; ?>
+                            <label for="inpRegistroPassword" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Contraseña</label>
+                            <input id="inpRegistroPassword" name="regPassword" class="form-component w-100 mb-4" type="password" required>
+                            <?php if (!empty($contrasenaError)) : ?>
+                                <label class="text-danger text-bold text-center font-12 w-100 pb-3 my-0"><i class="fas fa-exclamation mx-2"></i><?= $contrasenaError ?></label>
+                            <?php endif; ?>
 
-                        <label for="inpPasswordAgain" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Repetir contraseña</label>
-                        <input id="inpPasswordAgain" name="regPasswordAgain" class="form-component w-100" type="password" required>
-                        <?php if (!empty($confContrasenaError)) : ?>
-                            <label class="text-danger text-bold text-center font-12 w-100 pb-3 my-0"><i class="fas fa-exclamation mx-2"></i><?= $confContrasenaError ?></label>
-                        <?php endif; ?>
+                            <label for="inpPasswordAgain" class="text-black-50 text-bold font-18"><i class="fas fa-key mx-2"></i>Repetir contraseña</label>
+                            <input id="inpPasswordAgain" name="regPasswordAgain" class="form-component w-100 mb-5" type="password" required>
+                            <?php if (!empty($confContrasenaError)) : ?>
+                                <label class="text-danger text-bold text-center font-12 w-100 pb-3 mb-2"><i class="fas fa-exclamation mx-2"></i><?= $confContrasenaError ?></label>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="claseNombre">
+                                <label for="inpRegistroNombre" class="text-black-50 text-bold"><i class="fas fa-font-case mr-2"></i>Nombre Completo</label>
+                                <input id="inpRegistroNombre" name="regNombreFull" class="form-component w-100 mb-4">
+                            </div>
+                            <div class="claseFecha">
+                                <label for="inpRegistroFecha" class="text-black-50 text-bold"><i class="fas fa-calendar-alt mr-2"></i>Fecha de Nacimiento</label>
+                                <input id="inpRegistroFecha" name="regFecha" type="date" class="form-component w-100 mb-4">
+                            </div>
+                            <div class="claseCelular">
+                                <label for="inpRegistroCelular" class="text-black-50 text-bold"><i class="fas fa-phone mr-2"></i>Teléfono Celular</label>
+                                <input id="inpRegistroCelular" name="regCelular" type="number" class="form-component w-100 mb-4">
+                            </div>
+                            <div class="claseDepartamento">
+                                <label for="selectorRegistroDepartamento" class="text-black-50 text-bold"><i class="fas fa-map-marker-alt mr-2"></i>Departamento</label>
+                                <select id="selectorRegistroDepartamento" name="regDepartamento" class="form-component w-100 mb-4">
+                                    <option value="">Seleccione</option>
+                                    <option value="Boaco">Boaco</option>
+                                    <option value="Carazo">Carazo</option>
+                                    <option value="Chinandega">Chinandega</option>
+                                    <option value="Chontales">Chontales</option>
+                                    <option value="Estelí">Esteli</option>
+                                    <option value="Granada">Granada</option>
+                                    <option value="Jinotega">Jinotega</option>
+                                    <option value="Leon">León</option>
+                                    <option value="Madriz">Madriz</option>
+                                    <option value="Managua">Managua</option>
+                                    <option value="Masaya">Masaya</option>
+                                    <option value="Matagalpa">Matagalpa</option>
+                                    <option value="NuevaSegovia">Nueva Segovia</option>
+                                    <option value="RAAN">RAAN</option>
+                                    <option value="RAAS">RAAS</option>
+                                    <option value="RioSanJuan">Rio San Juan</option>
+                                    <option value="Rivas">Rivas</option>
+                                </select>
+                            </div>
+                            <div class="claseGenero">
+                                <label for="selectorRegistroGenero" class="text-black-50 text-bold"><i class="fas fa-venus-mars mr-2"></i>Género</label>
+                                <select id="selectorRegistroGenero" name="regGenero" class="form-component align-middle w-100 mb-4">
+                                    <option value="">Seleccione</option>
+                                    <option value="Hombre">Hombre</option>
+                                    <option value="Mujer">Mujer</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer w-100 items-in-row py-2">
                         <button type="submit" value="Submit" class="button-primary text-white text-bold mx-auto">Registrar<i class="fas fa-arrow-right ml-2"></i></button>
@@ -85,6 +132,7 @@ require './../controllers/register.php';
                 </form>
             </div>
         </div>
+
     </div>
     <!--Este es el pie de pagina-->
     <div class="bg-tertiary mx-auto">

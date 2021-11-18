@@ -17,7 +17,11 @@ $updatePassword = 'UPDATE accounts SET contrasena = :nuevaContrasena WHERE id = 
 
 /*query de insert*/
 //insert del registro de usuario
-$insertNewUser = 'INSERT INTO accounts (nombre_usuario, contrasena, correo, activo) VALUES (:usuario, :regpassword, :email, 1)';
+$insertNewUser = 'INSERT INTO `accounts` (`nombre_usuario`, `contrasena`, `correo`, `activo`, `nombre`, `fechaNac`, `departamento`, `celular`, `genero`) VALUES (:usuario, :regpassword, :email, 1, :nombreCompleto, :fechaNacimiento, :departamento, :celular,:genero)';
+
+//$insertNewUser = 'INSERT INTO accounts (nombre_usuario, contrasena, correo, activo) VALUES (:usuario, :regpassword, :email, 1)';
+//INSERT INTO `accounts` (`nombre_usuario`, `contrasena`, `correo`, `activo`, `nombre`, `fechaNac`, `departamento`, `celular`, `genero`) VALUES (:usuario, :regoassword, :email, 1, :nombreCompleto, :fechaNacimiento, :departamento, :celular, :genero)
+
 
 /*query del restablecimiento de contraseña*/
 $selectPassReset ='SELECT * FROM password_reset WHERE `user_id` = :userID';

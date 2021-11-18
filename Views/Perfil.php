@@ -58,13 +58,13 @@ require_once './../controllers/sesionActiva.php';
                 <!-- Descripcion -->
                 <div class="col-12">
                     <div class="px-3 py-3 h-100">
-                        <div class="w-100 h-100 card shadow-default">
+                        <div class="mx-auto h-100 card shadow-default">
                             <div class="card-title w-100 items-in-row p-3">
                                 <label class="w-100 text-center m-auto font-18 text-bold"><?= $user['nombre_usuario']; ?></label>
                             </div>
                             <div id="cardBodyProfile" class="card-body row m-0 px-3">
 
-                                <div class="row m-0 col-lg-4 col-md-6 col-sm-12 ">
+                                <div class="row mx-auto m-0 col-lg-4 col-md-6 col-sm-12 ">
                                     <div id="container-profile" class="container px-0 ">
                                         <div id="wrapper-profile" class="wrapper w-100 h-100 ">
                                             <!---Elementos para subir la imagen-->
@@ -83,11 +83,11 @@ require_once './../controllers/sesionActiva.php';
                                     </div>
                                 </div>
 
-                                <div id="desc-persona" class="row col-lg-8 col-md-6 col-sm-12 mx-auto">
+                                <!-- <div id="desc-persona" class="row col-lg-8 col-md-6 col-sm-12 mx-auto">
                                     <div class="py-0 w-100 h-100">
                                         <textarea disabled id="txtDescript" class="form-component text-justify m-0 w-100" placeholder="Breve descripción de tu persona..."></textarea>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -103,15 +103,15 @@ require_once './../controllers/sesionActiva.php';
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="claseNombre">
                                         <label for="inpNombre" class="text-black-50 text-bold"><i class="fas fa-font-case mr-2"></i>Nombre Completo</label>
-                                        <input disabled id="inpNombre" class="form-component w-100 mb-4" value="<?= $user['nombre_usuario']; ?>">
+                                        <input disabled id="inpNombre" class="form-component w-100 mb-4" value="<?= $user['nombre']; ?>">
                                     </div>
                                     <div class="claseFecha">
                                         <label for="inpFecha" class="text-black-50 text-bold"><i class="fas fa-calendar-alt mr-2"></i>Fecha de Nacimiento</label>
-                                        <input disabled id="inpFecha" type="date" class="form-component w-100 mb-4">
+                                        <input disabled id="inpFecha" type="date" class="form-component w-100 mb-4" value="<?= $user['fechaNac']; ?>">
                                     </div>
                                     <div class="claseCelular">
                                         <label for="inpCelular" class="text-black-50 text-bold"><i class="fas fa-phone mr-2"></i>Teléfono Celular</label>
-                                        <input disabled id="inpCelular" class="form-component w-100 mb-4">
+                                        <input disabled id="inpCelular" class="form-component w-100 mb-4" value="<?= $user['celular']; ?>">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -121,34 +121,11 @@ require_once './../controllers/sesionActiva.php';
                                     </div>
                                     <div class="claseDepartamento">
                                         <label for="selectorDepartamento" class="text-black-50 text-bold"><i class="fas fa-map-marker-alt mr-2"></i>Departamento</label>
-                                        <select disabled id="selectorDepartamento" class="form-component w-100 mb-4">
-                                            <option value="">Seleccione</option>
-                                            <option value="1">Boaco</option>
-                                            <option value="2">Carazo</option>
-                                            <option value="3">Chinandega</option>
-                                            <option value="4">Chontales</option>
-                                            <option value="5">Esteli</option>
-                                            <option value="6">Granada</option>
-                                            <option value="7">Jinotega</option>
-                                            <option value="8">Leon</option>
-                                            <option value="9">Madriz</option>
-                                            <option value="10">Managua</option>
-                                            <option value="11">Masaya</option>
-                                            <option value="12">Matagalpa</option>
-                                            <option value="13">Nueva Segovia</option>
-                                            <option value="14">RAAN</option>
-                                            <option value="15">RAAS</option>
-                                            <option value="16">Rio San Juan</option>
-                                            <option value="17">Rivas</option>
-                                        </select>
+                                        <input disabled id="inpDepartamento" class="form-component w-100 mb-4" value="<?= $user['departamento']; ?>">
                                     </div>
                                     <div class="claseGenero">
                                         <label for="selectorGenero" class="text-black-50 text-bold"><i class="fas fa-venus-mars mr-2"></i>Género</label>
-                                        <select disabled id="selectorGenero" class="form-component align-middle w-100 mb-4">
-                                            <option value="">Seleccione</option>
-                                            <option value="1">Hombre</option>
-                                            <option value="2">Mujer</option>
-                                        </select>
+                                        <input disabled id="inpGenero" class="form-component w-100 mb-4" value="<?= $user['genero']; ?>">
                                     </div>
                                 </div>
                             </div>

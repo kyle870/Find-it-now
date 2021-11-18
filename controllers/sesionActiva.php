@@ -6,6 +6,7 @@
         $records = $conn->prepare('SELECT * FROM accounts WHERE id = :id');
         $records->bindParam(':id', $_SESSION['user_id']);
         $records->execute();
+        
         $results = $records->fetch(PDO::FETCH_ASSOC);
 
         $user = null;

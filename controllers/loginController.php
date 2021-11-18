@@ -30,10 +30,6 @@ if (!empty($_POST['logMail']) && !empty($_POST['logPassword'])) {
     $total_records = $records->rowcount();
 
     //verificar si es un md5 válido
-    function isValidMd5($md5 = '')
-    {
-        return preg_match('/^[a-f0-9]{32}$/', $md5);
-    }
 
     if ($total_records > 0 && (md5($logContrasena) == $resultados['contrasena'] || $logContrasena == $resultados['contrasena'])) {
         if ($resultados['activo'] == 1) {

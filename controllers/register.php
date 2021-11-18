@@ -3,7 +3,7 @@
 require_once './../config/connection.php';
 require_once './../query/allquery.php';
 //set variables de usuario como vacías
-$nombreUsuario = $passwordUsuario = $repPassword = $emailUsuario = "";
+$nombreUsuario = $passwordUsuario = $repPassword = $emailUsuario = $nombreCompleto = $fechaNac = $departamento = $celularUser = $generoUser = "";
 $usuarioError = $contrasenaError = $confContrasenaError = $emailError = "";
 $message = "";
 
@@ -13,6 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $emailUsuario = $_POST['regEmail'];
     $passwordUsuario = $_POST['regPassword'];
     $repPassword = $_POST['regPasswordAgain'];
+    $nombreCompleto = $_POST['regNombreFull'];
+    $fechaNac = $_POST['regFecha'];
+    $celularUser = $_POST['regCelular'];
+    $departamento = $_POST['regDepartamento'];
+    $generoUser = $_POST['regGenero'];
 
     //variables de conexion SQL
     $selector_id =  $conn->prepare($idSelect);
@@ -101,6 +106,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = md5($passwordUsuario);
         $stmt->bindParam(':regpassword', $password);
         $stmt->bindParam(':email', $emailUsuario);
+        $stmt->bindParam(':nombreCompleto', $nombreCompleto);
+        $stmt->bindParam(':fechaNacimiento', $fechaNac);
+        $stmt->bindParam(':departamento', $departamento);
+        $stmt->bindParam(':celular', $celularUser);
+        $stmt->bindParam(':genero', $generoUser);
+
 
         if ($stmt->execute()) {
             $message = 'Usuario creado satisfactoriamente';

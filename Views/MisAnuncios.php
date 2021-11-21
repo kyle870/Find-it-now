@@ -94,7 +94,6 @@ require_once './../controllers/mostrarMisAnuncios.php';
                                         <th class="text-center">Categoría</th>
                                         <th class="text-center">Estado</th>
                                         <th class="text-center">Precio</th>
-                                        <!-- <th>Disponibilidad</th> -->
                                         <th class="text-center">Feha y hora de publicado</th>
                                         <th class="text-center">Acción</th>
                                     </tr>

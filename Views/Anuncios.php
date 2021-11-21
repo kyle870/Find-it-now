@@ -209,7 +209,7 @@ require_once './../controllers/mostrarAnunciosController.php';
                 <div class="col-extlarg-4 col-larg-4 col-mediu-6 col-peque-12 ">                
                     <div class="card-advertisement shadow-black jump m-3 cursor-pointer ">
                         <!--Este es la seccion de la foto del anuncio y precio-->
-                        <div class="photo row m-0" style="background-image: url( './../Resources/no-photo-available.png'); ">
+                        <div class="photo row m-0" style="background-image: url( '<?php echo $dato->fotos?>'); ">
                             <span class="price mb-2 mt-auto px-3 py-1 ">
                                 $<?php echo $dato->precio?>
                             </span>

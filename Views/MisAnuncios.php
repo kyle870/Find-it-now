@@ -1,6 +1,7 @@
-<?php 
-    require_once './../config/connection.php';
-    require_once './../controllers/sesionActiva.php';
+<?php
+require_once './../config/connection.php';
+require_once './../controllers/sesionActiva.php';
+require_once './../controllers/mostrarMisAnuncios.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -68,15 +69,10 @@
                     </div>
                     <div class="card-body">
                         <div class="row mx-0 mb-4">
-                            <!-- <button class="button-primary text-white-75 mx-2">Todos</button>
-                            <button class="button-defautl text-primary mx-2">Publicados</button>
-                            <button class="button-defautl text-primary mx-2">Inactivos</button>
-                            <button class="button-defautl text-primary mx-2">Expirados</button>
-                            <button class="button-defautl text-primary mx-2">Cancelados</button> -->
                             <!-- Menu ddropeable -->
                             <div class="dropdown">
                                 <button class="button-primary text-white-75 dropdown-toggle" type="button" id="dropdownMenuCategorias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Seleccionar categoria
+                                    Seleccionar categoría
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuCategorias">
                                     <button class="dropdown-item" type="button">Todos</button>
@@ -85,7 +81,7 @@
                                     <button class="dropdown-item" type="button">Expirados</button>
                                     <button class="dropdown-item" type="button">Cancelados</button>
                                 </div>
-                              </div>
+                            </div>
                             <!--  -->
                         </div>
 
@@ -93,138 +89,41 @@
                             <table class="col-12 table">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">
-                                            Foto
-                                        </th>
-                                        <th class="text-center">
-                                            Nombre del Anuncio
-                                        </th>
-                                        <th class="text-center">
-                                            Categoria
-                                        </th>
-                                        <th class="text-center">
-                                            Estado
-                                        </th>
-                                        <th class="text-center">
-                                            Precio
-                                        </th>
-                                        <th>
-                                            Disponibilidad
-                                        </th>
-                                        <th class="text-center">
-                                            Tiempo Disponibilidad
-                                        </th>
-                                        <th class="text-center">
-                                            Acción
-                                        </th>
+                                        <th class="text-center">Foto</th>
+                                        <th class="text-center">Nombre del Anuncio</th>
+                                        <th class="text-center">Categoría</th>
+                                        <th class="text-center">Estado</th>
+                                        <th class="text-center">Precio</th>
+                                        <!-- <th>Disponibilidad</th> -->
+                                        <th class="text-center">Feha y hora de publicado</th>
+                                        <th class="text-center">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <img class="img" src="../Resources/AnunciosDestacados/Anuncio_Laptop.png">
-                                        </td>
-                                        <td class="text-black">Apple Macbook Pro</td>
-                                        <td class="text-black">Aparatos Electronicos</td>
-                                        <td class="text-black">Publicado</td>
-                                        <td class="text-black">$ 600</td>
-                                        <td class="text-black">----</td>
-                                        <td class="text-black">20 Días</td>
-                                        <td class="text-black">
-                                            <button class="btn-edit cursor-pointer">
-                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M24.3113 6.93872L22.0604 9.1897C21.8309 9.41919 21.4598 9.41919 21.2303 9.1897L15.8104 3.76978C15.5809 3.54028 15.5809 3.16919 15.8104 2.9397L18.0613 0.688721C18.9744 -0.224365 20.4588 -0.224365 21.3768 0.688721L24.3113 3.62329C25.2293 4.53638 25.2293 6.02075 24.3113 6.93872ZM13.8768 4.87329L1.05451 17.6956L0.0193508 23.6282C-0.122251 24.429 0.575992 25.1223 1.37677 24.9856L7.30939 23.9456L20.1317 11.1233C20.3611 10.8938 20.3611 10.5227 20.1317 10.2932L14.7117 4.87329C14.4774 4.6438 14.1063 4.6438 13.8768 4.87329ZM6.05939 16.5969C5.79083 16.3284 5.79083 15.8987 6.05939 15.6301L13.5789 8.1106C13.8475 7.84204 14.2772 7.84204 14.5457 8.1106C14.8143 8.37915 14.8143 8.80884 14.5457 9.07739L7.02619 16.5969C6.75763 16.8655 6.32794 16.8655 6.05939 16.5969ZM4.29669 20.7034H6.64044V22.4758L3.49103 23.0276L1.97248 21.509L2.52423 18.3596H4.29669V20.7034Z"
-                                                        fill="#03A9F4" />
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img class="img" src="../Resources/AnunciosDestacados/Anuncio_Licuadora.png">
-                                        </td>
-                                        <td class="text-black">Licuadora Power Max Full Yes</td>
-                                        <td class="text-black">Electrodomesticos </td>
-                                        <td class="text-black">Publicado</td>
-                                        <td class="text-black">$ 100</td>
-                                        <td class="text-black">----</td>
-                                        <td class="text-black">7 Días</td>
-                                        <td class="text-black">
-                                            <button class="btn-edit cursor-pointer">
-                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M24.3113 6.93872L22.0604 9.1897C21.8309 9.41919 21.4598 9.41919 21.2303 9.1897L15.8104 3.76978C15.5809 3.54028 15.5809 3.16919 15.8104 2.9397L18.0613 0.688721C18.9744 -0.224365 20.4588 -0.224365 21.3768 0.688721L24.3113 3.62329C25.2293 4.53638 25.2293 6.02075 24.3113 6.93872ZM13.8768 4.87329L1.05451 17.6956L0.0193508 23.6282C-0.122251 24.429 0.575992 25.1223 1.37677 24.9856L7.30939 23.9456L20.1317 11.1233C20.3611 10.8938 20.3611 10.5227 20.1317 10.2932L14.7117 4.87329C14.4774 4.6438 14.1063 4.6438 13.8768 4.87329ZM6.05939 16.5969C5.79083 16.3284 5.79083 15.8987 6.05939 15.6301L13.5789 8.1106C13.8475 7.84204 14.2772 7.84204 14.5457 8.1106C14.8143 8.37915 14.8143 8.80884 14.5457 9.07739L7.02619 16.5969C6.75763 16.8655 6.32794 16.8655 6.05939 16.5969ZM4.29669 20.7034H6.64044V22.4758L3.49103 23.0276L1.97248 21.509L2.52423 18.3596H4.29669V20.7034Z"
-                                                        fill="#03A9F4" />
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img class="img" src="../Resources/AnunciosDestacados/Anuncio_Casa.png">
-                                        </td>
-                                        <td class="text-black">Casa La Gran Sultana</td>
-                                        <td class="text-black">Bienes Raices / Alquiler de casa </td>
-                                        <td class="text-black">Publicado</td>
-                                        <td class="text-black">$ 280</td>
-                                        <td class="text-black">----</td>
-                                        <td class="text-black">3 Días</td>
-                                        <td class="text-black">
-                                            <button class="btn-edit cursor-pointer">
-                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M24.3113 6.93872L22.0604 9.1897C21.8309 9.41919 21.4598 9.41919 21.2303 9.1897L15.8104 3.76978C15.5809 3.54028 15.5809 3.16919 15.8104 2.9397L18.0613 0.688721C18.9744 -0.224365 20.4588 -0.224365 21.3768 0.688721L24.3113 3.62329C25.2293 4.53638 25.2293 6.02075 24.3113 6.93872ZM13.8768 4.87329L1.05451 17.6956L0.0193508 23.6282C-0.122251 24.429 0.575992 25.1223 1.37677 24.9856L7.30939 23.9456L20.1317 11.1233C20.3611 10.8938 20.3611 10.5227 20.1317 10.2932L14.7117 4.87329C14.4774 4.6438 14.1063 4.6438 13.8768 4.87329ZM6.05939 16.5969C5.79083 16.3284 5.79083 15.8987 6.05939 15.6301L13.5789 8.1106C13.8475 7.84204 14.2772 7.84204 14.5457 8.1106C14.8143 8.37915 14.8143 8.80884 14.5457 9.07739L7.02619 16.5969C6.75763 16.8655 6.32794 16.8655 6.05939 16.5969ZM4.29669 20.7034H6.64044V22.4758L3.49103 23.0276L1.97248 21.509L2.52423 18.3596H4.29669V20.7034Z"
-                                                        fill="#03A9F4" />
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img class="img" src="../Resources/AnunciosDestacados/Anuncio_Empleo.png">
-                                        </td>
-                                        <td class="text-black">Vacantes de empleo</td>
-                                        <td class="text-black">Empleos </td>
-                                        <td class="text-black">Publicado</td>
-                                        <td class="text-black">----</td>
-                                        <td class="text-black">----</td>
-                                        <td class="text-black">15 Días</td>
-                                        <td class="text-black">
-                                            <button class="btn-edit cursor-pointer">
-                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M24.3113 6.93872L22.0604 9.1897C21.8309 9.41919 21.4598 9.41919 21.2303 9.1897L15.8104 3.76978C15.5809 3.54028 15.5809 3.16919 15.8104 2.9397L18.0613 0.688721C18.9744 -0.224365 20.4588 -0.224365 21.3768 0.688721L24.3113 3.62329C25.2293 4.53638 25.2293 6.02075 24.3113 6.93872ZM13.8768 4.87329L1.05451 17.6956L0.0193508 23.6282C-0.122251 24.429 0.575992 25.1223 1.37677 24.9856L7.30939 23.9456L20.1317 11.1233C20.3611 10.8938 20.3611 10.5227 20.1317 10.2932L14.7117 4.87329C14.4774 4.6438 14.1063 4.6438 13.8768 4.87329ZM6.05939 16.5969C5.79083 16.3284 5.79083 15.8987 6.05939 15.6301L13.5789 8.1106C13.8475 7.84204 14.2772 7.84204 14.5457 8.1106C14.8143 8.37915 14.8143 8.80884 14.5457 9.07739L7.02619 16.5969C6.75763 16.8655 6.32794 16.8655 6.05939 16.5969ZM4.29669 20.7034H6.64044V22.4758L3.49103 23.0276L1.97248 21.509L2.52423 18.3596H4.29669V20.7034Z"
-                                                        fill="#03A9F4" />
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img class="img" src="../Resources/AnunciosDestacados/Anuncio_Guitarra.png">
-                                        </td>
-                                        <td class="text-black">Guitarra Electroacustica Fender</td>
-                                        <td class="text-black">Instrumentos Musicales</td>
-                                        <td class="text-black">Publicado</td>
-                                        <td class="text-black">$ 350</td>
-                                        <td class="text-black">----</td>
-                                        <td class="text-black">1 Día</td>
-                                        <td class="text-black">
-                                            <button class="btn-edit cursor-pointer">
-                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M24.3113 6.93872L22.0604 9.1897C21.8309 9.41919 21.4598 9.41919 21.2303 9.1897L15.8104 3.76978C15.5809 3.54028 15.5809 3.16919 15.8104 2.9397L18.0613 0.688721C18.9744 -0.224365 20.4588 -0.224365 21.3768 0.688721L24.3113 3.62329C25.2293 4.53638 25.2293 6.02075 24.3113 6.93872ZM13.8768 4.87329L1.05451 17.6956L0.0193508 23.6282C-0.122251 24.429 0.575992 25.1223 1.37677 24.9856L7.30939 23.9456L20.1317 11.1233C20.3611 10.8938 20.3611 10.5227 20.1317 10.2932L14.7117 4.87329C14.4774 4.6438 14.1063 4.6438 13.8768 4.87329ZM6.05939 16.5969C5.79083 16.3284 5.79083 15.8987 6.05939 15.6301L13.5789 8.1106C13.8475 7.84204 14.2772 7.84204 14.5457 8.1106C14.8143 8.37915 14.8143 8.80884 14.5457 9.07739L7.02619 16.5969C6.75763 16.8655 6.32794 16.8655 6.05939 16.5969ZM4.29669 20.7034H6.64044V22.4758L3.49103 23.0276L1.97248 21.509L2.52423 18.3596H4.29669V20.7034Z"
-                                                        fill="#03A9F4" />
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    <?PHP
+                                    foreach ($anunciosTotal as $dato) {
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <img class="img" src="<?php echo $dato->fotos?>">
+                                            </td>
+                                            <td class="text-black"><?php echo $dato->titulo ?></td>
+                                            <td class="text-black"><?php echo $dato->categoria ?></td>
+                                            <td class="text-black">Publicado</td>
+                                            <td class="text-black">$<?php echo $dato->precio ?></td>
+                                            <!-- <td class="text-black">----</td> -->
+                                            <td class="text-black"><?php echo $dato->horaPublicacion ?></td>
+                                            <td class="text-black">
+                                                <button class="btn-edit cursor-pointer">
+                                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M24.3113 6.93872L22.0604 9.1897C21.8309 9.41919 21.4598 9.41919 21.2303 9.1897L15.8104 3.76978C15.5809 3.54028 15.5809 3.16919 15.8104 2.9397L18.0613 0.688721C18.9744 -0.224365 20.4588 -0.224365 21.3768 0.688721L24.3113 3.62329C25.2293 4.53638 25.2293 6.02075 24.3113 6.93872ZM13.8768 4.87329L1.05451 17.6956L0.0193508 23.6282C-0.122251 24.429 0.575992 25.1223 1.37677 24.9856L7.30939 23.9456L20.1317 11.1233C20.3611 10.8938 20.3611 10.5227 20.1317 10.2932L14.7117 4.87329C14.4774 4.6438 14.1063 4.6438 13.8768 4.87329ZM6.05939 16.5969C5.79083 16.3284 5.79083 15.8987 6.05939 15.6301L13.5789 8.1106C13.8475 7.84204 14.2772 7.84204 14.5457 8.1106C14.8143 8.37915 14.8143 8.80884 14.5457 9.07739L7.02619 16.5969C6.75763 16.8655 6.32794 16.8655 6.05939 16.5969ZM4.29669 20.7034H6.64044V22.4758L3.49103 23.0276L1.97248 21.509L2.52423 18.3596H4.29669V20.7034Z" fill="#03A9F4" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -264,9 +163,7 @@
                         <span class="my-auto ">
                             <svg class="icon " viewBox="0 0 45 45 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                                 <circle cx="22.5 " cy="22.5 " r="22.5 " fill="#03A9F4 " />
-                                <path
-                                    d="M29.2148 24.875L30.0592 19.4457H24.7801V15.9225C24.7801 14.4371 25.5176 12.9893 27.8819 12.9893H30.2818V8.3668C30.2818 8.3668 28.1039 8 26.0217 8C21.6742 8 18.8325 10.6004 18.8325 15.3078V19.4457H14V24.875H18.8325V38H24.7801V24.875H29.2148Z "
-                                    fill="white " />
+                                <path d="M29.2148 24.875L30.0592 19.4457H24.7801V15.9225C24.7801 14.4371 25.5176 12.9893 27.8819 12.9893H30.2818V8.3668C30.2818 8.3668 28.1039 8 26.0217 8C21.6742 8 18.8325 10.6004 18.8325 15.3078V19.4457H14V24.875H18.8325V38H24.7801V24.875H29.2148Z " fill="white " />
                             </svg>
 
                         </span>
@@ -279,16 +176,14 @@
                         <span class="my-auto ">
                             <svg class="icon " viewBox="0 0 45 45 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                                 <circle cx="22.5 " cy="22.5 " r="22.5 " fill="#03A9F4 " />
-                                <path
-                                    d="M22.0029 16.3339C18.3139 16.3339 15.3383 19.3102 15.3383 23C15.3383 26.6898 18.3139 29.6661 22.0029 29.6661C25.6919 29.6661 28.6675 26.6898 28.6675 23C28.6675 19.3102 25.6919 16.3339 22.0029 16.3339ZM22.0029 27.3338C19.619
+                                <path d="M22.0029 16.3339C18.3139 16.3339 15.3383 19.3102 15.3383 23C15.3383 26.6898 18.3139 29.6661 22.0029 29.6661C25.6919 29.6661 28.6675 26.6898 28.6675 23C28.6675 19.3102 25.6919 16.3339 22.0029 16.3339ZM22.0029 27.3338C19.619
                             27.3338 17.67 25.3903 17.67 23C17.67 20.6097 19.6132 18.6662 22.0029 18.6662C24.3926 18.6662 26.3358 20.6097 26.3358 23C26.3358 25.3903 24.3868 27.3338 22.0029 27.3338ZM30.4946 16.0613C30.4946 16.9257 29.7986 17.6161 28.9401 17.6161C28.0759
                             17.6161 27.3856 16.9199 27.3856 16.0613C27.3856 15.2026 28.0817 14.5064 28.9401 14.5064C29.7986 14.5064 30.4946 15.2026 30.4946 16.0613ZM34.9086 17.6393C34.81 15.5565 34.3344 13.7116 32.8089 12.1916C31.2892 10.6715 29.4447 10.1958
                             27.3624 10.0914C25.2163 9.96954 18.7837 9.96954 16.6376 10.0914C14.5611 10.19 12.7166 10.6657 11.1911 12.1858C9.66559 13.7058 9.19576 15.5507 9.09136 17.6335C8.96955 19.7801 8.96955 26.2141 9.09136 28.3607C9.18996 30.4435 9.66559
                             32.2884 11.1911 33.8084C12.7166 35.3285 14.5553 35.8042 16.6376 35.9086C18.7837 36.0305 25.2163 36.0305 27.3624 35.9086C29.4447 35.81 31.2892 35.3343 32.8089 33.8084C34.3286 32.2884 34.8042 30.4435 34.9086 28.3607C35.0305 26.2141
                             35.0305 19.7859 34.9086 17.6393ZM32.1361 30.664C31.6837 31.8011 30.8078 32.6771 29.6651 33.1354C27.954 33.8142 23.8938 33.6576 22.0029 33.6576C20.112 33.6576 16.046 33.8084 14.3407 33.1354C13.2038 32.6829 12.3279 31.8069 11.8697
                             30.664C11.1911 28.9525 11.3477 24.8913 11.3477 23C11.3477 21.1087 11.1969 17.0417 11.8697 15.336C12.3221 14.1989 13.198 13.3229 14.3407 12.8646C16.0518 12.1858 20.112 12.3424 22.0029 12.3424C23.8938 12.3424 27.9598 12.1916 29.6651
-                            12.8646C30.802 13.3171 31.6779 14.1931 32.1361 15.336C32.8147 17.0475 32.6581 21.1087 32.6581 23C32.6581 24.8913 32.8147 28.9583 32.1361 30.664Z "
-                                    fill="white " />
+                            12.8646C30.802 13.3171 31.6779 14.1931 32.1361 15.336C32.8147 17.0475 32.6581 21.1087 32.6581 23C32.6581 24.8913 32.8147 28.9583 32.1361 30.664Z " fill="white " />
                             </svg>
 
                         </span>
@@ -299,8 +194,7 @@
 
                     <div class="col-12 text-white-75 row m-0 ">
                         <span class="my-auto ">
-                            <svg class="icon my-auto " viewBox="0 0 45 45 " fill="none "
-                                xmlns="http://www.w3.org/2000/svg ">
+                            <svg class="icon my-auto " viewBox="0 0 45 45 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                                 <circle cx="22.5 " cy="22.5 " r="22.5 " fill="#03A9F4 " />
                                 <path d="M32.3274 16.705C32.3439 16.936 32.3439 17.167 32.3439 17.398C32.3439 24.4423 26.9823 32.5591 17.1827 32.5591C14.1637 32.5591 11.3591 31.6847 9 30.167C9.42895 30.2165 9.84134 30.233 10.2868 30.233C12.7779 30.233
                             15.0711 29.3916 16.9023 27.9563C14.5596 27.9068 12.5964 26.3726 11.92 24.2609C12.25 24.3104 12.5799 24.3434 12.9264 24.3434C13.4048 24.3434 13.8833 24.2773 14.3287 24.1619C11.8871 23.667 10.0558 21.5223 10.0558 18.9322V18.8662C10.7652

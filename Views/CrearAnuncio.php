@@ -61,7 +61,7 @@ require './../controllers/crearAnuncioController.php';
     <!--Contenido de la página-->
     <div class="p-3 mt-5 pt-5">
 
-        <form id="frmCrearAnuncio" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <form id="frmCrearAnuncio" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-extlarg-4 col-larg-4 col-mediu-6 col-peque-12 row m-0">
                     <div class="col-12">
@@ -136,32 +136,15 @@ require './../controllers/crearAnuncioController.php';
                                 </div>
                                 <div class="card-body row m-0 px-3">
 
-                                    <div class="container">
-                                        <div id="contenedorImagenAnuncio" class="wrapper h-100 ">
-                                            <div class="image border-0">
-                                                <img class="mh-100 mw-100" id="vista" src="#" alt="">
-                                            </div>
-                                            <div id="textPreview" class="content">
-                                                <div class="icon text-center">
-                                                    <i class="fas fa-cloud-upload-alt"></i>
-                                                </div>
-                                                <div class="text text-center text-black-50 p-2">
-                                                    No has seleccionado una imagen para tu anuncio!
-                                                </div>
-                                            </div>
-                                            <div id="cancel-btn">
-                                                <i class="fas fa-times"></i>
-                                            </div>
-                                            <div class="file-name text-center">
-                                                File name here
-                                            </div>
-                                        </div>
+                                    <div class="custom-file">
+                                        <input id="default-btn" class="custom-file-input" name="updateImagenAnuncio" type="file" accept="image/*">
+                                        <label class="custom-file-label text-truncate" for="customFile"><i class="fas fa-cloud-upload-alt mx-2"></i>Elegir imagen para tu anuncio</label>
                                     </div>
 
-                                    <div id="containerButton" class=" w-100">
+                                    <!-- <div id="containerButton" class=" w-100">
                                         <button class="mt-3 btn btn-info btn-block " onclick="defaultBtnActive()" id="custom-btn"><i class="fas fa-cloud-upload-alt mx-2"></i>Cargar foto</button>
                                         <input id="default-btn" type="file" hidden>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -171,16 +154,22 @@ require './../controllers/crearAnuncioController.php';
                         <div class="px-3 py-3 h-100">
                             <div class="w-100 h-100 card shadow-default">
                                 <div class="card-title w-100 items-in-row py-3">
-                                    <label class="w-100 text-center m-auto font-18 text-bold">Descripción</label>
+                                    <label class="w-100 text-center m-auto font-18 text-bold">Descripción del artículo</label>
                                 </div>
                                 <div class="card-body row m-0 pt-2">
-                                    <textarea id="descript" name="inpPostAnuncioDesc" class="form-component w-100 m-0" placeholder="Breve descripción de la publicación"></textarea>
+                                    <textarea id="descript" name="inpPostAnuncioDesc" class="form-component w-100 m-0" rows="5" placeholder="Breve descripción de la publicación" style="resize: none;"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <?php if (!empty($message)) : ?>
+                <label class="text-danger text-bold text-center font-18 w-100 m-0"><i class="fas fa-exclamation-triangle mx-2"></i><?= $message ?></label>
+            <?php endif; ?>
+            <?php if (!empty($messageSuccess)) : ?>
+                <label class="text-success text-bold text-center font-18 w-100 m-0"><i class="fas fa-check mx-2"></i><?= $messageSuccess ?></label>
+            <?php endif; ?>
             <div id="contenedor-botones" class="row mx-auto">
                 <div id="contenedor" class="row d-flex justify-content-center mx-auto pb-3">
                     <button id="btn-postear" type="submit" value="Submit" class="button-primary text-white cursor-pointer mx-5 font-weight-bold"><i class="fas fa-upload mr-3"></i>Publicar</button>
@@ -311,9 +300,14 @@ require './../controllers/crearAnuncioController.php';
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="./../Scripts/crearanuncio.js"></script>
-    <script src="./../Scripts/imagenCargada.js"></script>
+    <!-- <script src="./../Scripts/imagenCargada.js"></script> -->
     <script src="./../Scripts/bootstrap.min.js"></script>
     <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }

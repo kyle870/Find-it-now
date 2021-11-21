@@ -10,7 +10,8 @@ create table if not exists `accounts`(
     `fechaNac` date,
     `departamento` varchar(25),
     `celular` int(8),
-    `genero` varchar(10)
+    `genero` varchar(10),
+    `imgperfil` varchar(255)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4_general_ci;
 /*-------------*/
 create table if not exists `password_reset`(
@@ -35,7 +36,7 @@ create table if not exists `announcements`(
     `descricion` text NOT NULL,
     `ubicacion` varchar(50) NOT NULL,
     `horaPublicacion` datetime,
-    `fotos` longblob,
+    `fotos` varchar(255),
     `id_user` int(11) NOT NULL,
     CONSTRAINT FOREIGN KEY fk_user_ad (id_user) REFERENCES `accounts` (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4_general_ci;

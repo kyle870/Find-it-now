@@ -1,6 +1,7 @@
 <?php
 require_once './../config/connection.php';
 require_once './../controllers/sesionActiva.php';
+require_once './../controllers/actualizarPerfil.php'
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -52,117 +53,105 @@ require_once './../controllers/sesionActiva.php';
     </nav>
 
     <!--Contenido de la página-->
-    <div class="p-3 mt-5 pt-5">
-        <div class="row">
-            <div class="col-12 row m-0 p-0">
-                <!-- Descripcion -->
-                <div class="col-12">
-                    <div class="px-3 py-3 h-100">
-                        <div class="w-100 h-100 card shadow-default">
-                            <div class="card-title w-100 items-in-row p-3">
-                                <label class="w-100 text-center m-auto font-18 text-bold"><?= $user['nombre_usuario']; ?></label>
-                            </div>
-                            <div id="cardBodyProfile" class="card-body row m-0 px-3">
-
-                                <div class="row mx-auto m-0 col-lg-4 col-md-6 col-sm-12 ">
-                                    <div id="container-profile" class="container px-0 ">
-                                        <div id="wrapper-profile" class="wrapper w-100 h-100 ">
-                                            <!---Elementos para subir la imagen-->
-                                            <div id="image-profile" class="image">
-                                                <img class="mh-100 mw-100" id="vista" src="#" alt="">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+        <div class="p-3 mt-5 pt-5">
+            <div class="row">
+                <div class="col-12 row m-0 p-0">
+                    <!-- Descripcion -->
+                    <div class="col-12">
+                        <div class="px-3 py-3 h-100">
+                            <div class="w-100 h-100 card shadow-default">
+                                <div class="card-title w-100 items-in-row p-3">
+                                    <label class="w-100 text-center m-auto font-18 text-bold"><?= $user['nombre_usuario']; ?></label>
+                                </div>
+                                <div id="cardBodyProfile" class="card-body row m-0 px-3">
+                                    <div class="row w-100 mx-auto m-0 p-0 col-sm-12 ">
+                                        <?php if (!empty($message)) : ?>
+                                            <label class="text-danger text-bold text-center font-18 w-100 m-0"><i class="fas fa-exclamation-triangle mx-2"></i><?= $message ?></label>
+                                        <?php endif; ?>
+                                        <?php if (!empty($messageSuccess)) : ?>
+                                            <label class="text-success text-bold text-center font-18 w-100 m-0"><i class="fas fa-check mx-2"></i><?= $messageSuccess ?></label>
+                                        <?php endif; ?>
+                                        <div id="btnGroup-profile" class="row justify-content-center py-3 my-auto mx-auto">
+                                            <!-- <button id="primary_profile-btn" type="button" class="btn btn-success text-white cursor-pointer font-weight-bold m-2"><i class="fas fa-cloud-upload-alt mx-2"></i>Cargar foto de perfil</button> -->
+                                            <div class="custom-file">
+                                                <input id="default-btn" class="custom-file-input" name="updateImagenPerfil" type="file" accept="image/*">
+                                                <label class="custom-file-label text-truncate" for="customFile"><i class="fas fa-cloud-upload-alt mx-2"></i>Elegir imagen de perfil</label>
                                             </div>
-                                            <div id="textPreview" class="content">
-                                                <div class="icon text-center">
-                                                    <i class="fas fa-cloud-upload-alt"></i>
-                                                </div>
-                                                <div class="text text-black-50 text-center p-2">
-                                                    Subir foto de perfil
-                                                </div>
-                                            </div>
+                                            <!-- <button id="cancel-profile-btn" class="btn btn-outline-danger cursor-pointer font-weight-bold m-2"><i class="fas fa-trash mx-2"></i>Eliminar</button> -->
                                         </div>
                                     </div>
-                                    <div id="btnGroup-profile" class="row justify-content-center py-3 my-auto mx-auto">
-                                        <button id="primary_profile-btn" type="button" onclick="defaultBtnActive()" class="btn btn-success text-white cursor-pointer  font-weight-bold m-2"><i class="fas fa-cloud-upload-alt mx-2"></i>Cargar</button>
-                                        <input id="default-btn" type="file" accept="image/*" hidden>
-                                        <button id="cancel-profile-btn" class="btn btn-outline-danger cursor-pointer  font-weight-bold m-2"><i class="fas fa-trash mx-2"></i>Eliminar</button>
-                                    </div>
                                 </div>
-
-                                <!-- <div id="desc-persona" class="row col-lg-8 col-md-6 col-sm-12 mx-auto">
-                                    <div class="py-0 w-100 h-100">
-                                        <textarea id="txtDescript" class="form-component text-justify m-0 w-100" placeholder="Breve descripción de tu persona..."></textarea>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Elementos personales -->
-                <div class="col-12">
-                    <div class="px-3 py-3 h-100">
-                        <div class="w-100 h-100 card shadow-default">
-                            <div class="card-title w-100 items-in-row py-3">
-                                <label class="w-100 text-center m-auto font-18 text-bold">Datos personales</label>
-                            </div>
-                            <div class="card-body row m-0 px-3">
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="claseNombre">
-                                        <label for="inpNombre" class="text-black-50 text-bold"><i class="fas fa-font-case mr-2"></i>Nombre Completo</label>
-                                        <input id="inpNombre" class="form-component w-100 mb-4">
-                                    </div>
-                                    <div class="claseFecha">
-                                        <label for="inpFecha" class="text-black-50 text-bold"><i class="fas fa-calendar-alt mr-2"></i>Fecha de Nacimiento</label>
-                                        <input id="inpFecha" type="date" class="form-component w-100 mb-4">
-                                    </div>
-                                    <div class="claseCelular">
-                                        <label for="inpCelular" class="text-black-50 text-bold"><i class="fas fa-phone mr-2"></i>Teléfono Celular</label>
-                                        <input id="inpCelular" class="form-component w-100 mb-4">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="claseCorreo">
-                                        <label for="inpCorreo" class="text-black-50 text-bold"><i class="fas fa-envelope mr-2"></i>Correo</label>
-                                        <input id="inpCorreo" type="email" class="form-component w-100 mb-4">
-                                    </div>
-                                    <div class="claseDepartamento">
-                                        <label for="selectorDepartamento" class="text-black-50 text-bold"><i class="fas fa-map-marker-alt mr-2"></i>Departamento</label>
-                                        <select id="selectorDepartamento" class="form-component w-100 mb-4">
-                                            <option value="">Seleccione</option>
-                                            <option value="1">Boaco</option>
-                                            <option value="2">Carazo</option>
-                                            <option value="3">Chinandega</option>
-                                            <option value="4">Chontales</option>
-                                            <option value="5">Esteli</option>
-                                            <option value="6">Granada</option>
-                                            <option value="7">Jinotega</option>
-                                            <option value="8">Leon</option>
-                                            <option value="9">Madriz</option>
-                                            <option value="10">Managua</option>
-                                            <option value="11">Masaya</option>
-                                            <option value="12">Matagalpa</option>
-                                            <option value="13">Nueva Segovia</option>
-                                            <option value="14">RAAN</option>
-                                            <option value="15">RAAS</option>
-                                            <option value="16">Rio San Juan</option>
-                                            <option value="17">Rivas</option>
-                                        </select>
-                                    </div>
-                                    <div class="claseGenero">
-                                        <label for="selectorGenero" class="text-black-50 text-bold"><i class="fas fa-venus-mars mr-2"></i>Género</label>
-                                        <select id="selectorGenero" class="form-component align-middle w-100 mb-4">
-                                            <option value="">Seleccione</option>
-                                            <option value="1">Hombre</option>
-                                            <option value="2">Mujer</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- Administración de la contraseña -->
+                    <!-- Elementos personales -->
+                    <div class="col-12">
+                        <div class="px-3 py-3 h-100">
+                            <div class="w-100 h-100 card shadow-default">
                                 <div class="card-title w-100 items-in-row py-3">
-                                    <label class="w-100 text-center m-auto font-18 text-bold">Administración de la cuenta</label>
+                                    <label class="w-100 text-center m-auto font-18 text-bold">Datos personales</label>
                                 </div>
-                                <div class="mt-3">
-                                    <button class="btn btn-info cursor-pointer  font-weight-bold m-2"><a href="./actualizarContrasena.php" class="text-white text-decoration-none">Cambiar contraseña</a></button>
-                                    <a href="./../controllers/eliminarCuenta.php" class="btn btn-outline-danger font-weight-bold m-2" role="button" onclick="return confirm('Seguro que desea eliminar la cuenta?')">Eliminar cuenta</a>
+                                <div class="card-body row m-0 px-3">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="claseNombre">
+                                            <label for="inpNombre" class="text-black-50 text-bold"><i class="fas fa-font-case mr-2"></i>Nombre Completo</label>
+                                            <input id="inpNombre" name="updateNombre" class="form-component w-100 mb-4" value="<?= $user['nombre']; ?>">
+                                        </div>
+                                        <div class="claseFecha">
+                                            <label for="inpFecha" class="text-black-50 text-bold"><i class="fas fa-calendar-alt mr-2"></i>Fecha de Nacimiento</label>
+                                            <input id="inpFecha" name="updateFechaNac" type="date" class="form-component w-100 mb-4" value="<?= $user['fechaNac']; ?>">
+                                        </div>
+                                        <div class="claseCelular">
+                                            <label for="inpCelular" class="text-black-50 text-bold"><i class="fas fa-phone mr-2"></i>Teléfono Celular</label>
+                                            <input id="inpCelular" name="updateCelular" class="form-component w-100 mb-4" value="<?= $user['celular']; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <!-- <div class="claseCorreo">
+                                            <label for="inpCorreo" class="text-black-50 text-bold"><i class="fas fa-envelope mr-2"></i>Correo</label>
+                                            <input id="inpCorreo" name="upda type="email" class="form-component w-100 mb-4">
+                                        </div> -->
+                                        <div class="claseDepartamento">
+                                            <label for="selectorDepartamento" class="text-black-50 text-bold"><i class="fas fa-map-marker-alt mr-2"></i>Departamento</label>
+                                            <select id="selectorDepartamento" name="updateDepartamento" class="form-component w-100 mb-4">
+                                                <option value="">Seleccione</option>
+                                                <option value="Boaco">Boaco</option>
+                                                <option value="Carazo">Carazo</option>
+                                                <option value="Chinandega">Chinandega</option>
+                                                <option value="Chontales">Chontales</option>
+                                                <option value="Estelí">Esteli</option>
+                                                <option value="Granada">Granada</option>
+                                                <option value="Jinotega">Jinotega</option>
+                                                <option value="Leon">León</option>
+                                                <option value="Madriz">Madriz</option>
+                                                <option value="Managua">Managua</option>
+                                                <option value="Masaya">Masaya</option>
+                                                <option value="Matagalpa">Matagalpa</option>
+                                                <option value="NuevaSegovia">Nueva Segovia</option>
+                                                <option value="RAAN">RAAN</option>
+                                                <option value="RAAS">RAAS</option>
+                                                <option value="RioSanJuan">Rio San Juan</option>
+                                                <option value="Rivas">Rivas</option>
+                                            </select>
+                                        </div>
+                                        <div class="claseGenero">
+                                            <label for="selectorGenero" class="text-black-50 text-bold"><i class="fas fa-venus-mars mr-2"></i>Género</label>
+                                            <select id="selectorGenero" name="updateGenero" class="form-component align-middle w-100 mb-4">
+                                                <option value="">Seleccione</option>
+                                                <option value="Hombre">Hombre</option>
+                                                <option value="Mujer">Mujer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Administración de la contraseña -->
+                                    <div class="card-title w-100 items-in-row py-3">
+                                        <label class="w-100 text-center m-auto font-18 text-bold">Administración de la cuenta</label>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-info cursor-pointer  font-weight-bold m-2"><a href="./actualizarContrasena.php" class="text-white text-decoration-none">Cambiar contraseña</a></button>
+                                        <a href="./../controllers/eliminarCuenta.php" class="btn btn-outline-danger font-weight-bold m-2" role="button" onclick="return confirm('Seguro que desea eliminar la cuenta?')">Eliminar cuenta</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -170,14 +159,14 @@ require_once './../controllers/sesionActiva.php';
                 </div>
             </div>
         </div>
-    </div>
-    <div id="contenedor-botones" class="row mx-auto">
-        <div id="contenedor" class="row d-flex justify-content-center mx-auto pb-3">
-            <button id="btn-guardar-perfil" class="button-save text-white cursor-pointer mx-5 font-weight-bold"><i class="fas fa-save mr-3"></i>Guardar</button>
-            <button id="btn-deshacer-perfil" class="button-cancel text-white cursor-pointer mx-5 font-weight-bold"><i class="fas fa-redo mr-3"></i><a href="./Perfil.php" class="text-white text-decoration-none">Deshacer</a></button>
+        <div id="contenedor-botones" class="row mx-auto">
+            <div id="contenedor" class="row d-flex justify-content-center mx-auto pb-3">
+                <button id="btn-guardar-perfil" value="Submit" type="submit" class="button-save text-white cursor-pointer mx-5 font-weight-bold"><i class="fas fa-save mr-3"></i>Guardar</button>
+                <button id="btn-deshacer-perfil" type="reset" class="button-cancel text-white cursor-pointer mx-5 font-weight-bold"><i class="fas fa-redo mr-3"></i><a href="./Perfil.php" class="text-white text-decoration-none">Regresar</a></button>
+            </div>
         </div>
-    </div>
-    </div>
+        </div>
+    </form>
 
     <!--Este es el pie de pagina-->
     <div class="bg-tertiary mx-auto ">
@@ -298,8 +287,18 @@ require_once './../controllers/sesionActiva.php';
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="./../Scripts/imagenPerfil.js"></script>
+    <!-- <script src="./../Scripts/imagenPerfil.js"></script> -->
     <script src="./../Scripts/bootstrap.min.js"></script>
+    <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
 </body>
 
 </html>

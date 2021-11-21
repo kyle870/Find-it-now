@@ -4,9 +4,10 @@ require_once './../config/connection.php';
 require_once './../query/allquery.php';
 date_default_timezone_set("America/Managua");
 //variables vacías
-$titulo = $categoria = $precio = $cantidad = $condicion = $descripcion = $ubicacion = $fotos = "";
+$titulo = $categoria = $precio = $cantidad = $condicion = $descripcion = $ubicacion = $updateImagenAnuncio = "";
 $messageError = "";
 $message = "";
+$messageSuccess = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $titulo = $_POST['inpPostAnuncioTitulo'];
@@ -15,12 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cantidad = $_POST['inpPostAnuncioCantidad'];
     $condicion = $_POST['selPostAnuncioCondicion'];
     $descripcion = $_POST['inpPostAnuncioDesc'];
-    //$fotos = $_POST[''];
     $ubicacion = $_POST['selPostAnuncioUbicacion'];
     //fecha y hora
     $fechaHora = date("Y/m/d h:i:sa");
+    //$fotos = $_POST[''];
+    //variables para la imagen de perfil
+    $directory = "./../Resources/AnunciosDestacados/";
+    $updateImagenAnuncio = $directory . basename($_FILES["updateImagenAnuncio"]["name"]);
 
-    if (!empty($titulo) && !empty($categoria) && !empty($precio) && !empty($cantidad) && !empty($condicion) && !empty($descripcion)) {
+    if (!empty($titulo) && !empty($categoria) && !empty($precio) && !empty($cantidad) && !empty($condicion) && !empty($descripcion) && move_uploaded_file($_FILES["updateImagenAnuncio"]["tmp_name"], $updateImagenAnuncio)) {
         //conexion SQL
         $stmt = $conn->prepare($insertAnuncio);
 
@@ -31,20 +35,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bindParam(':cantidad', $cantidad);
         $stmt->bindParam(':condicion', $condicion);
         $stmt->bindParam(':descripcion', $descripcion);
-        $stmt->bindParam(':ubicacion',$ubicacion);
-        $stmt->bindParam(':fechaHora',$fechaHora);
+        $stmt->bindParam(':ubicacion', $ubicacion);
+        $stmt->bindParam(':fechaHora', $fechaHora);
+        $stmt->bindParam(':fotos', $updateImagenAnuncio);
         $stmt->bindParam(':idUsuario', $_SESSION['user_id']);
 
         if ($stmt->execute()) {
-            //$message = 'Anuncio creado satisfactoriamente';
-            echo '<script>alert("Anuncio creado satisfactoriamente")</script>';
+            $messageSuccess = 'Anuncio creado satisfactoriamente';
         } else {
-            //$message = 'Lo sentimos, hubo un error al publicar tu anuncio';
-            echo '<script>alert("Lo sentimos, hubo un error al publicar tu anuncio")</script>';
+            $message = 'Lo sentimos, hubo un error al publicar tu anuncio';
         }
     } else {
-        //$message = 'Lo sentimos, hubo un error al publicar tu anuncio';
-        echo '<script>alert("Lo sentimos, hubo un error al publicar tu anuncio")</script>';
+        $message = 'Por favor llena todos los campos y sube una imagen de anuncio';
     }
     unset($stmt);
 }

@@ -35,7 +35,13 @@ $updateRestorePass = 'UPDATE accounts SET contrasena = :passwordUser WHERE id = 
 $deleteRestoresPass = 'DELETE FROM `password_reset` WHERE `user_id`= :userID';
 
 //insert de los anuncios
-$insertAnuncio = 'INSERT INTO `announcements` (`titulo`, `categoria`, `precio`, `cantidad`, `condicion`, `descricion`, `ubicacion`, `horaPublicacion`, `id_user`) VALUES (:titulo, :categoria, :precio, :cantidad, :condicion, :descripcion, :ubicacion, :fechaHora, :idUsuario)';
+//$insertAnuncio = 'INSERT INTO `announcements` (`titulo`, `categoria`, `precio`, `cantidad`, `condicion`, `descricion`, `ubicacion`, `horaPublicacion`, `id_user`) VALUES (:titulo, :categoria, :precio, :cantidad, :condicion, :descripcion, :ubicacion, :fechaHora, :idUsuario)';
+$insertAnuncio = 'INSERT INTO `announcements` (`titulo`, `categoria`, `precio`, `cantidad`, `condicion`, `descricion`, `ubicacion`, `horaPublicacion`, `fotos`, `id_user`) VALUES (:titulo, :categoria, :precio, :cantidad, :condicion, :descripcion, :ubicacion, :fechaHora, :fotos, :idUsuario)';
 
 //select de los anuncios
 $selectAnuncios = 'SELECT * FROM `announcements`';
+//select de mis anuncio
+$selectMisAnuncios = 'SELECT * FROM `announcements` WHERE `id_user`=:userID';
+
+//Actualizar el perfil
+$updateProfile = "UPDATE `accounts` SET `nombre`=:nombreCompleto,`fechaNac`=:fechaNac,`departamento`=:departamento,`celular`=:celular,`genero`=:genero,`imgperfil`=:imgPerfil WHERE id = :sessionID";

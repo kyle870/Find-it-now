@@ -54,40 +54,26 @@ require_once './../controllers/sesionActiva.php';
     <!--Contenido de la página-->
     <div class="p-3 mt-5 pt-5">
         <div class="row">
-            <div class="col-12 row m-0 p-0">
+            <div class="col-12 justify-content-center row m-0 p-0">
                 <!-- Descripcion -->
-                <div class="col-12">
+                <div class="col-8">
                     <div class="px-3 py-3 h-100">
                         <div class="mx-auto h-100 card shadow-default">
                             <div class="card-title w-100 items-in-row p-3">
                                 <label class="w-100 text-center m-auto font-18 text-bold"><?= $user['nombre_usuario']; ?></label>
                             </div>
-                            <div id="cardBodyProfile" class="card-body row m-0 px-3">
-
+                            <div class="card-body row">
                                 <div class="row mx-auto m-0 col-lg-4 col-md-6 col-sm-12 ">
-                                    <div id="container-profile" class="container px-0 ">
-                                        <div id="wrapper-profile" class="wrapper w-100 h-100 ">
-                                            <!---Elementos para subir la imagen-->
-                                            <div id="image-profile" class="image">
-                                                <img class="mh-100 mw-100" id="vista" src="#" alt="">
-                                            </div>
-                                            <div id="textPreview" class="content">
-                                                <div class="icon text-center">
-                                                    <i class="fas fa-cloud-upload-alt"></i>
-                                                </div>
-                                                <div class="text text-black-50 text-center p-2">
-                                                    Subir foto de perfil
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <!---Elementos para subir la imagen-->
+                                    <div id="image-profile" class="image mx-0 px-0 ">
+                                        <?php if ($user['imgperfil'] == './../Resources/uploads/' || $user['imgperfil'] == NULL) : ?>
+                                            <img class="img-thumbnail" id="vista" src="./../Resources/no-user.png" height='100'>
+                                        <?php endif; ?>
+                                        <?php if (($user['imgperfil'] != './../Resources/uploads/') || ($user['imgperfil'] != NULL)) : ?>
+                                            <img class="img-thumbnail" id="vista" src="<?= $user['imgperfil']; ?>" height='100'>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
-
-                                <!-- <div id="desc-persona" class="row col-lg-8 col-md-6 col-sm-12 mx-auto">
-                                    <div class="py-0 w-100 h-100">
-                                        <textarea disabled id="txtDescript" class="form-component text-justify m-0 w-100" placeholder="Breve descripción de tu persona..."></textarea>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -261,7 +247,7 @@ require_once './../controllers/sesionActiva.php';
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="./../Scripts/imagenPerfil.js"></script>
+    <!-- <script src="./../Scripts/imagenPerfil.js"></script> -->
     <script src="./../Scripts/bootstrap.min.js"></script>
 </body>
 

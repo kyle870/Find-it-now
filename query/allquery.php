@@ -17,7 +17,7 @@ $updatePassword = 'UPDATE accounts SET contrasena = :nuevaContrasena WHERE id = 
 
 /*query de insert*/
 //insert del registro de usuario
-$insertNewUser = 'INSERT INTO `accounts` (`nombre_usuario`, `contrasena`, `correo`, `activo`, `nombre`, `fechaNac`, `departamento`, `celular`, `genero`) VALUES (:usuario, :regpassword, :email, 1, :nombreCompleto, :fechaNacimiento, :departamento, :celular,:genero)';
+$insertNewUser = 'INSERT INTO `accounts` (`nombre_usuario`, `contrasena`, `correo`, `activo`, `nombre`, `fechaNac`, `departamento`, `celular`, `genero`) VALUES (:usuario, :regpassword, :email, 1, :nombreCompleto, :fechaNacimiento, :departamento, :celular, :genero)';
 
 //$insertNewUser = 'INSERT INTO accounts (nombre_usuario, contrasena, correo, activo) VALUES (:usuario, :regpassword, :email, 1)';
 //INSERT INTO `accounts` (`nombre_usuario`, `contrasena`, `correo`, `activo`, `nombre`, `fechaNac`, `departamento`, `celular`, `genero`) VALUES (:usuario, :regoassword, :email, 1, :nombreCompleto, :fechaNacimiento, :departamento, :celular, :genero)
@@ -33,3 +33,9 @@ $selectMailReset ="SELECT * FROM `password_reset` WHERE `user_id`= :userID";
 $updateRestorePass = 'UPDATE accounts SET contrasena = :passwordUser WHERE id = :userID';
 //Eliminar contraseña luego de ser visualizada en el correo
 $deleteRestoresPass = 'DELETE FROM `password_reset` WHERE `user_id`= :userID';
+
+//insert de los anuncios
+$insertAnuncio = 'INSERT INTO `announcements` (`titulo`, `categoria`, `precio`, `cantidad`, `condicion`, `descricion`, `ubicacion`, `horaPublicacion`, `id_user`) VALUES (:titulo, :categoria, :precio, :cantidad, :condicion, :descripcion, :ubicacion, :fechaHora, :idUsuario)';
+
+//select de los anuncios
+$selectAnuncios = 'SELECT * FROM `announcements`';

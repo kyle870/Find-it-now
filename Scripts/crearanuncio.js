@@ -33,40 +33,52 @@ document.getElementById("btn-postear").addEventListener("click", function () {
                                                     }
                                                 } else {
                                                     alert("Para continuar debera agregar el telefono convencional");
+                                                     window.history.replaceState(null, null, window.location.href);
                                                 }
                                             } else {
                                                 alert("Para continuar debera agregar el departamento");
+                                                 window.history.replaceState(null, null, window.location.href);
                                             }
                                         } else {
                                             alert("Para continuar debera agregar su correo electronico");
+                                             window.history.replaceState(null, null, window.location.href);
                                         }
                                     } else {
                                         alert("Para continuar debe agregar el telefono celular");
+                                         window.history.replaceState(null, null, window.location.href);
                                     }
                                 } else {
                                     alert("Para continuar debe agregar la direccion");
+                                     window.history.replaceState(null, null, window.location.href);
                                 }
                             } else {
                                 alert("Para continuar debe agregar el nombre completo");
+                                 window.history.replaceState(null, null, window.location.href);
                             }
                         } else {
                             alert("Para continuar debe agregar la descripcion del anuncio");
+                             window.history.replaceState(null, null, window.location.href);
                         }
                     } else {
                         alert("Para continuar debe seleccionar la condicion del anuncio");
+                         window.history.replaceState(null, null, window.location.href);
                     }
                 } else {
                     alert("Para continuar debe seleccionar la disponibilidad del anuncio");
+                     window.history.replaceState(null, null, window.location.href);
                 }
 
             } else {
                 alert("Para continuar debe ingresar el precio del anuncio");
+                 window.history.replaceState(null, null, window.location.href);
             }
         } else {
             alert("Para continuar debe seleccionar una categoria de anuncio");
+             window.history.replaceState(null, null, window.location.href);
         }
     } else {
         alert("Para poder continual ingrese un valor en el titulo del anuncio");
+         window.history.replaceState(null, null, window.location.href);
     }
 });
 

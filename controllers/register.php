@@ -120,5 +120,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         unset($stmt);
     }
-    unset($pdo);
+    unset($conn);
 }

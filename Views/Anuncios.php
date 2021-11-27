@@ -2,6 +2,7 @@
 require_once './../config/connection.php';
 require_once './../controllers/sesionActiva.php';
 require_once './../controllers/mostrarAnunciosController.php';
+//require_once './../controllers/pagination.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -172,7 +173,7 @@ require_once './../controllers/mostrarAnunciosController.php';
                 </div>
             </div>
         </div>
-        <div class="col-extlarg-8 col-lg-8 col-md-8 col-sm-12 row m-0 mb-5">
+        <div class="align-self-start col-extlarg-8 col-lg-8 col-md-8 col-sm-12 row m-0 mb-5">
             <div class="my-3 col-12 px-0">
                 <div class="border-radius-20 shadow-default px-4 py-2 mx-auto my-0 row">
                     <div class="row col-12 mx-auto">
@@ -189,13 +190,6 @@ require_once './../controllers/mostrarAnunciosController.php';
                             </select>
                         </div>
                         <div class="mx-auto">
-                            <select class="form-component mx-3">
-                                <option value="10">10 Resultados</option>
-                                <option value="15">15 Resultados</option>
-                                <option value="20">20 Resultados</option>
-                            </select>
-                        </div>
-                        <div class="mx-auto">
                             <button class="button-primary text-white text-bold mx-3" type="button">Buscar<i class="fas fa-search ml-2"></i></button>
                         </div>
                     </div>
@@ -204,273 +198,110 @@ require_once './../controllers/mostrarAnunciosController.php';
             <!--Seccion de Anuncios  -->
             <div class="col-12 row m-0 px-0">
                 <?PHP
-                foreach ($anunciosTotal as $dato) {
+                foreach ($totalAnunciosLimitados as $dato) {
                 ?>
-                <div class="col-extlarg-4 col-larg-4 col-mediu-6 col-peque-12 ">                
-                    <div class="card-advertisement shadow-black jump m-3 cursor-pointer ">
-                        <!--Este es la seccion de la foto del anuncio y precio-->
-                        <div class="photo row m-0" style="background-image: url( '<?php echo $dato->fotos?>'); ">
-                            <span class="price mb-2 mt-auto px-3 py-1 ">
-                                $<?php echo $dato->precio?>
-                            </span>
-                        </div>
-                        <!--Esta es la seccion del nombre del anuncio, categoria y icono de guardar-->
-                        <div class="border-bottom p-3 ">
-                            <div class="row m-0 mb-2 ">
-                                <span class="text-truncate text-bold col-10 mr-auto ml-0 my-auto pl-0">
-                                    <?php echo $dato->titulo?>
-                                </span>
-                                <span class="text-primary my-auto ">
-                                    <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="bookmark " class="icon svg-inline--fa fa-bookmark fa-w-12 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 384 512 ">
-                                        <path fill="currentColor " d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z ">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
-                            <span class="text-text-bold-600 text-black-50 ml-auto mr-0 ">
-                            <?php echo $dato->categoria?>
-                            </span>
-                        </div>
-                        <!--Este es el div de valoracion y ubicacion del anuncio-->
-                        <div class="p-3 row m-0 ">
-                            <div class="mr-auto ml-0 valoracion row ">
-                                <div class="my-auto mr-2 ">
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                        150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                        150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                        150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                        150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                        150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
+                    <div class="col-extlarg-4 col-larg-4 col-mediu-6 col-peque-12 ">
+                        <a href="./VerAnuncio.php?id=<?php echo $dato->id_ad ?>" class="text-decoration-none text-black">
+                            <div class="card-advertisement shadow-black jump m-3 cursor-pointer ">
+                                <!--Este es la seccion de la foto del anuncio y precio-->
+                                <div class="photo row m-0" style="background-image: url( '<?php echo $dato->fotos ?>'); ">
+                                    <span class="price mb-2 mt-auto px-3 py-1 ">
+                                        C$<?php echo $dato->precio ?>
                                     </span>
                                 </div>
-                                <Span class="text-black-50 puntuacion my-auto ">
-                                    (N valoraciones)
-                                </Span>
-                            </div>
-                            <div class="mr-0 ml-auto ubicacion ">
-                                <span>
-                                    <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="map-marker-alt " class="icon svg-inline--fa fa-map-marker-alt fa-w-12 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 384 512 ">
-                                        <path fill="currentColor " d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80
-                        35.817-80 80 35.817 80 80 80z ">
-                                        </path>
-                                    </svg>
-                                </span>
-                                <span class="text-black-50 ">
-                                <?php echo $dato->ubicacion?>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
-                }
-                ?>
-
-                <div class="col-extlarg-4 col-larg-4 col-mediu-6 col-peque-12 ">
-                    <a href="./VerAnuncio.php" class="text-decoration-none text-black">
-                        <div class="card-advertisement shadow-black jump m-3 cursor-pointer ">
-                            <!--Este es la seccion de la foto del anuncio y precio-->
-                            <div class="photo row m-0 " style="background-image: url( './../Resources/AnunciosDestacados/Anuncio_Laptop.png'); ">
-                                <span class="price mb-2 mt-auto px-3 py-1 ">
-                                    $600
-                                </span>
-                            </div>
-                            <!--Esta es la seccion del nombre del anuncio, categoria y icono de guardar-->
-                            <div class="border-bottom p-3 ">
-                                <div class="row m-0 mb-2 ">
-                                    <span class="text-bold col-10 mr-auto ml-0 my-auto pl-0">
-                                        Apple Macbook Pro
-                                    </span>
-                                    <span class="text-primary my-auto ">
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="bookmark " class="icon svg-inline--fa fa-bookmark fa-w-12 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 384 512 ">
-                                            <path fill="currentColor " d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                </div>
-                                <span class="text-text-bold-600 text-black-50 ml-auto mr-0 ">
-                                    Aparatos Eletrónicos
-                                </span>
-                            </div>
-                            <!--Este es el div de valoracion y ubicacion del anuncio-->
-                            <div class="p-3 row m-0 ">
-                                <div class="mr-auto ml-0 valoracion row ">
-                                    <div class="my-auto mr-2 ">
-                                        <span>
-                                            <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                                <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                            150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                                </path>
-                                            </svg>
+                                <!--Esta es la seccion del nombre del anuncio, categoria y icono de guardar-->
+                                <div class="border-bottom p-3 ">
+                                    <div class="row m-0 mb-2 ">
+                                        <span class="text-truncate text-bold col-10 mr-auto ml-0 my-auto pl-0">
+                                            <?php echo $dato->titulo ?>
                                         </span>
-                                        <span>
-                                            <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                                <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                            150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                                <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                            150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                                <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                            150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                        <span>
-                                            <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                                <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
-                            150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
+                                        <span class="text-primary my-auto ">
+                                            <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="bookmark " class="icon svg-inline--fa fa-bookmark fa-w-12 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 384 512 ">
+                                                <path fill="currentColor " d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z ">
                                                 </path>
                                             </svg>
                                         </span>
                                     </div>
-                                    <Span class="text-black-50 puntuacion my-auto ">
-                                        (9 valoraciones)
-                                    </Span>
-                                </div>
-                                <div class="mr-0 ml-auto ubicacion ">
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="map-marker-alt " class="icon svg-inline--fa fa-map-marker-alt fa-w-12 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 384 512 ">
-                                            <path fill="currentColor " d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80
-                            35.817-80 80 35.817 80 80 80z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span class="text-black-50 ">
-                                        Managua
+                                    <span class="text-text-bold-600 text-black-50 ml-auto mr-0 ">
+                                        <?php echo $dato->categoria ?>
                                     </span>
                                 </div>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
-                <!--Este es el div de un anuncioLicuadora-->
-                <div class="col-extlarg-4 col-larg-4 col-mediu-6 col-peque-12 ">
-
-                    <div class="card-advertisement shadow-black jump m-3 cursor-pointer ">
-                        <!--Este es la seccion de la foto del anuncio y precio-->
-                        <div class="photo row m-0 " style="background-image: url( './../Resources/AnunciosDestacados/Anuncio_Licuadora.png'); ">
-                            <span class="price mb-2 mt-auto px-3 py-1 ">
-                                $1000
-                            </span>
-                        </div>
-                        <!--Esta es la seccion del nombre del anuncio, categoria y icono de guardar-->
-                        <div class="border-bottom p-3 ">
-                            <div class="row m-0 mb-2 ">
-                                <span class="text-truncate text-bold col-10 mr-auto ml-0 my-auto pl-0">
-                                    Licuadora Max Power Full Yes
-                                </span>
-                                <span class="text-primary my-auto ">
-                                    <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="bookmark " class="icon svg-inline--fa fa-bookmark fa-w-12 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 384 512 ">
-                                        <path fill="currentColor " d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z ">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
-                            <span class="text-text-bold-600 text-black-50 ml-auto mr-0 ">
-                                Aparatos Electrónicos
-                            </span>
-                        </div>
-                        <!--Este es el div de valoracion y ubicacion del anuncio-->
-                        <div class="p-3 row m-0 ">
-                            <div class="mr-auto ml-0 valoracion row ">
-                                <div class="my-auto mr-2 ">
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
+                                <!--Este es el div de valoracion y ubicacion del anuncio-->
+                                <div class="p-3 row m-0 ">
+                                    <div class="mr-auto ml-0 valoracion row ">
+                                        <div class="my-auto mr-2 ">
+                                            <span>
+                                                <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
+                                                    <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
                         150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                            <span>
+                                                <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
+                                                    <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
                         150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                            <span>
+                                                <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
+                                                    <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
                         150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                            <span>
+                                                <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
+                                                    <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
                         150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
-                                            <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                            <span>
+                                                <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="star " class="star svg-inline--fa fa-star fa-w-18 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 576 512 ">
+                                                    <path fill="currentColor " d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382
                         150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z ">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                </div>
-                                <Span class="text-black-50 puntuacion my-auto ">
-                                    (10 valoraciones)
-                                </Span>
-                            </div>
-                            <div class="mr-0 ml-auto ubicacion ">
-                                <span>
-                                    <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="map-marker-alt " class="icon svg-inline--fa fa-map-marker-alt fa-w-12 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 384 512 ">
-                                        <path fill="currentColor " d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <Span class="text-black-50 puntuacion my-auto ">
+                                            (N valoraciones)
+                                        </Span>
+                                    </div>
+                                    <div class="mr-0 ml-auto ubicacion ">
+                                        <span>
+                                            <svg aria-hidden="true " focusable="false " data-prefix="fas " data-icon="map-marker-alt " class="icon svg-inline--fa fa-map-marker-alt fa-w-12 " role="img " xmlns="http://www.w3.org/2000/svg " viewBox="0 0 384 512 ">
+                                                <path fill="currentColor " d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80
                         35.817-80 80 35.817 80 80 80z ">
-                                        </path>
-                                    </svg>
-                                </span>
-                                <span class="text-black-50 ">
-                                    Masaya
-                                </span>
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <span class="text-black-50 ">
+                                            <?php echo $dato->ubicacion ?>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                </div>
-                <!-- Anuncio predeterminado vacío -->
+                <?php $no++;
+                }
+                ?>
             </div>
         </div>
     </div>
+    <!-- pagination  -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="?page=1">Primera</a></li>
+            <?php for ($p = 1; $p <= $total_pages; $p++) { ?>
+                <li class="<?= $page == $p ? 'active' : ''; ?> page-item"><a  class="page-link" href="<?= '?page=' . $p; ?>"><?= $p; ?></a></li>
+            <?php } ?>
+            <li class="page-item"><a class="page-link" href="?page=<?= $total_pages; ?>">Ultima</a></li>
+        </ul>
+    </nav>
 
     <!--Este es el pie de pagina-->
     <footer>

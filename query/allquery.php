@@ -45,3 +45,8 @@ $selectMisAnuncios = 'SELECT * FROM `announcements` WHERE `id_user`=:userID';
 
 //Actualizar el perfil
 $updateProfile = "UPDATE `accounts` SET `nombre`=:nombreCompleto,`fechaNac`=:fechaNac,`departamento`=:departamento,`celular`=:celular,`genero`=:genero,`imgperfil`=:imgPerfil WHERE id = :sessionID";
+
+//array de los anuncios
+$selectAnuncioIndividual = "SELECT * FROM announcements WHERE id_ad = :idanuncio";
+
+//$selectAnunciosLimitados = "SELECT * FROM announcements LIMIT $start, $limite";

@@ -1,6 +1,10 @@
 <?php
 require_once './../config/connection.php';
 require_once './../controllers/sesionActiva.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ./../Views/Login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

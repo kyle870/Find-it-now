@@ -1,6 +1,7 @@
-<?php 
-    require_once './../config/connection.php';
-    require_once './../controllers/sesionActiva.php';
+<?php
+require_once './../config/connection.php';
+//require_once './../controllers/sesionActiva.php';
+require_once './../controllers/cargarAnuncio.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,9 +19,9 @@
     <link rel="stylesheet" href="./../Style/sizes.css">
     <link rel="stylesheet" href="./../Style/bootstrap.min.css">
     <link rel="shortcut icon" href="./../Resources/icono.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-    <title>Anuncios</title>
+    <title>Ver Anuncio / <?php echo $datosAnuncio->titulo; ?></title>
 </head>
 
 <body class="pt-5">
@@ -41,9 +42,9 @@
             </div>
             <div class="navbar-nav ml-auto">
                 <!-- Div del post del anuncio -->
-                <?php if(!empty($user)): ?>
+                <?php if (!empty($user)) : ?>
                     <div class="button-primary mr-3">
-                    <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
+                        <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
                     </div>
                     <!-- div contenedor de los botones -->
                     <div class="mr-3">
@@ -51,10 +52,9 @@
                             <a href="./Perfil.php" class=" bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none"><?= $user['nombre_usuario']; ?></a>
                         </div>
                     </div>
-                <?php else: ?>
+                <?php else : ?>
                     <div class="button-secondary mr-3">
-                    <a href="./Login.php"
-                        class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Iniciar Sesión</a>
+                        <a href="./Login.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Iniciar Sesión</a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -66,7 +66,7 @@
         <div class="row mx-0 justify-content-center">
             <div class=" col-extlarg-6 col-mediu-6 col-peque-12">
                 <div class="h-100 px-3 pb-3">
-                    <img src="../Resources/AnunciosDestacados/Anuncio_Laptop.png" class="w-100 h-100 img-fluid border-radius-20">
+                    <img src="<?php echo $datosAnuncio->fotos; ?>" class="h-100 img-fluid border-radius-20">
                 </div>
             </div>
             <div class="col-extlarg-3 col-mediu-6 col-peque-12">
@@ -76,12 +76,12 @@
                             <label class="w-100 text-black text-bold text-center">Información del Anunciante</label>
                         </div>
                         <div class="card-body row m-0 justify-content-center">
-                            <span id="nombreAnunciante" class="text-black col-12 mb-4 text-bold text-center bb-black-20 px-0 pb-2">Jonissa María Alfaro Carrión</span>
+                            <span id="nombreAnunciante" class="text-black col-12 mb-4 text-bold text-center bb-black-20 px-0 pb-2"><?php echo $totalAnunciante->nombre; ?></span>
                             <span class="text-black text-bold col-md-6 col-lg-6 col-sm-12 mb-2">Teléfono Celular:</span>
-                            <span id="celularAnunciante" class="text-black col-md-6 col-lg-6 col-sm-12 mb-2">88898879</span>
+                            <span id="celularAnunciante" class="text-black col-md-6 col-lg-6 col-sm-12 mb-2"><?php echo $totalAnunciante->celular; ?></span>
                             <span class="text-black text-bold col-md-6 col-lg-6 col-sm-12 mb-2">Correo Electrónico:</span>
-                            <span id="correoAnunciante" class="text-black col-md-6 col-lg-6 col-sm-12 mb-2">jonissa@gmail.com</span>
-                            <label class="col-12 my-2 text-ok text-bold">PERFIL VERIFICADO <i class="fas fa-check ml-2"></i></label>
+                            <span id="correoAnunciante" class="text-black col-md-6 col-lg-6 col-sm-12 mb-2"><?php echo $totalAnunciante->correo; ?></span>
+                            <!-- <label class="col-12 my-2 text-ok text-bold">PERFIL VERIFICADO <i class="fas fa-check ml-2"></i></label> -->
                             <button type="submit" class="button-primary text-white-90 text-bold">Notificar interés<i class="fas fa-bell ml-2"></i></button>
                         </div>
                     </div>
@@ -94,66 +94,22 @@
                             <label class="w-100 text-black text-bold text-center">Otros anuncios de este perfil</label>
                         </div>
                         <div class="card-body row mx-0 px-2 max-h-otros-anuncios">
-                            <div class="col-12 row mx-0 mb-3 pb-3 bb-black-20">
-                                <img class=" p-0" src="../Resources/AnunciosDestacados/Anuncio_Laptop.png" height="50">
-                                <div class="col-6 p-0 ml-3 my-auto">
-                                    <label class="col-12 p-0 text-bold text-start m-0 ">Apple Macbook Pro</label><br>
+                            <?PHP
+                            foreach ($anunciosTotal as $dato) {
+                            ?>
+                                <div class="col-12 row mx-0 mb-3 pb-3 bb-black-20">
+                                    <img class=" p-0" src="<?php echo $dato->fotos; ?>" height="50">
+                                    <div class="col-6 p-0 ml-3 my-auto">
+                                        <label class="col-12 p-0 text-bold text-start m-0 "><?php echo $dato->titulo; ?></label><br>
+                                    </div>
+                                    <div class="my-auto py-2">
+                                        <label class="col-12 p-0 text-black text-center m-0"><?php echo $dato->categoria; ?></label>
+                                    </div>
+                                    <label class="ml-auto mr-0 text-bold-600 my-auto">$<?php echo $dato->precio; ?></label>
                                 </div>
-                                <div class="my-auto py-2">
-                                    <label class="col-12 p-0 text-black text-center m-0">Aparatos Electrónicos</label>
-                                </div>
-                                <label class="ml-auto mr-0 text-bold-600 my-auto">$6000</label>
-                            </div>
-                            <div class="col-12 row mx-0 mb-3 pb-3 bb-black-20">
-                                <img src="../Resources/AnunciosDestacados/Anuncio_Casa.png" height="50">
-                                <div class="col-6 p-0 ml-3 my-auto">
-                                    <label class="col-12 p-0 text-bold text-start m-0">Casa La Gran Sultana</label><br>
-                                </div>
-                                <div class="my-auto py-2">
-                                    <label class="col-12 p-0 text-black text-center m-0">Bienes Raíces</label>
-                                </div>
-                                <label class="ml-auto mr-0 text-bold-600 my-auto">$280</label>
-                            </div>
-                            <div class="col-12 row mx-0 mb-3 pb-3 bb-black-20">
-                                <img src="../Resources/AnunciosDestacados/Anuncio_ConverseStar.png" height="50">
-                                <div class="col-6 p-0 ml-3 my-auto">
-                                    <label class="col-12 p-0 text-bold text-start m-0">Converse Star</label><br>
-                                </div>
-                                <div class="my-auto py-2">
-                                    <label class="col-12 p-0 text-black text-center m-0">Calzado</label>
-                                </div>
-                                <label class="ml-auto mr-0 text-bold-600 my-auto">$80</label>
-                            </div>
-                            <div class="col-12 row mx-0 mb-3 pb-3 bb-black-20">
-                                <img src="../Resources/AnunciosDestacados/Anuncio_Guitarra.png" height="50">
-                                <div class="col-6 p-0 ml-3 my-auto">
-                                    <label class="col-12 p-0 text-bold text-start m-0">Guittarra Electroacústica Fender</label><br>
-                                </div>
-                                <div class="my-auto py-2">
-                                    <label class="col-12 p-0 text-black text-center m-0">Instrumentos musicales</label>
-                                </div>
-                                <label class="ml-auto mr-0 text-bold-600 my-auto">$350</label>
-                            </div>
-                            <div class="col-12 row mx-0 mb-3 pb-3 bb-black-20">
-                                <img src="../Resources/AnunciosDestacados/Anuncio_Camioneta.png" height="50">
-                                <div class="col-6 p-0 ml-3 my-auto">
-                                    <label class="col-12 p-0 text-bold text-start m-0">Toyota Hilux 4x4 2014</label><br>
-                                </div>
-                                <div class="my-auto py-2">
-                                    <label class="col-12 p-0 text-black text-center m-0">Vehículos</label>
-                                </div>
-                                <label class="ml-auto mr-0 text-bold-600 my-auto">$23,5000</label>
-                            </div>
-                            <div class="col-12 row mx-0 mb-3 pb-3 bb-black-20">
-                                <img src="../Resources/AnunciosDestacados/Anuncio_Empleo.png" height="50">
-                                <div class="col-6 p-0 ml-3 my-auto">
-                                    <label class="col-12 p-0 text-bold text-start m-0">Vacantes de empleo</label><br>
-                                </div>
-                                <div class="my-auto py-2">
-                                    <label class="col-12 p-0 text-black text-center m-0">Empleos</label>
-                                </div>
-                                <label class="ml-auto mr-0 text-bold-600 my-auto">10 vacantes</label>
-                            </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -168,75 +124,47 @@
                         </div>
                         <div class="card-body row m-0 pt-3">
                             <p class="text-black-75 col-12 text-justify">
-                                El MacBook Pro te ofrece un rendimiento descomunal gracias a sus procesadores Intel Core de séptima generación, con velocidades Turbo Boost de hasta 4,1 GHz. Nada le frena, ni un render de modelos en 3D ni una codificación de vídeo. Y ahorra energía en
-                                las tareas sencillas como navegar por Internet o leer emails.
-                                <br>
-                                <br> Además, el MacBook Pro incluye un codificador de vídeo de alta eficiencia de 10 bits para aprovechar al máximo la velocidad del streaming y la compresión en 4K que vendrá en macOS High Sierra.
-                                <br>
-                                <br> Especificación:
-                                <br> Almacenamiento flash PCIe de 256 GB Intel Core i5 de doble núcleo a 2,7 GHz
-                                <br> Turbo Boost de hasta 3,1 GHz
-                                <br> Gráficos Intel Iris 6100
-                                <br> Memoria de 8GB
-                                <br> Duración de la batería de 10 horas
-                                <br> Pantalla Retina de 13,3 "
-                                <br> 1 año de garantía internacional
+                                <?php echo $datosAnuncio->descricion; ?>
                             </p>
                         </div>
                         <div class="card-footer">
                             <div class="p-4">
                                 <div class="row mx-auto text-justify">
                                     <div class="my-2">
-                                        <span class="text-bold-600 mr-2">
-                                            Categoria: 
-                                        </span>
-                                        <span class="text-black-75 mr-3">
-                                            Aparatos Electronicos
-                                        </span>
+                                        <span class="text-bold-600 mr-2">Categoría:</span>
+                                        <span class="text-black-75 mr-3"><?php echo $datosAnuncio->categoria; ?></span>
                                     </div>
 
                                     <div class="my-2">
-                                        <span class="text-bold-600 mr-2">
-                                            Condicion: 
-                                         </span>
-                                         <span class="text-black-75 mr-3">
-                                             Nuevo
-                                         </span>
+                                        <span class="text-bold-600 mr-2">Condición:</span>
+                                        <span class="text-black-75 mr-3"><?php echo $datosAnuncio->condicion; ?></span>
                                     </div>
                                     <div class="my-2">
-                                        <span class="text-bold-600 mr-2">
-                                            Ubicacion: 
-                                        </span>
-                                        <span class="text-black-75 mr-3">
-                                            Managua
-                                        </span>
+                                        <span class="text-bold-600 mr-2">Ubicación:</span>
+                                        <span class="text-black-75 mr-3"><?php echo $datosAnuncio->ubicacion; ?></span>
                                     </div>
                                     <div class="my-2">
-                                        <span class="text-bold-600 mr-2">
-                                            Fecha de publicacion: 
-                                        </span>
-                                        <span class="text-black-75 mr-3">
-                                            13/04/2021 10:56 am
-                                        </span>
+                                        <span class="text-bold-600 mr-2">Fecha de publicación: </span>
+                                        <span class="text-black-75 mr-3"><?php echo $datosAnuncio->horaPublicacion; ?></span>
                                     </div>
                                 </div>
                                 <div class="row mx-auto my-2 justify-content-start">
                                     <span class="text-bold-600 mr-2 my-auto">
-                                        Valorar: 
+                                        Valorar:
                                     </span>
                                     <div class="container-star">
                                         <div class="rating d-flex flex-row-reverse">
-                                          <input type="radio" name="rating" id="rating-5">
-                                          <label for="rating-5" class="my-auto"></label>
-                                          <input type="radio" name="rating" id="rating-4">
-                                          <label for="rating-4" class="my-auto"></label>
-                                          <input type="radio" name="rating" id="rating-3">
-                                          <label for="rating-3" class="my-auto"></label>
-                                          <input type="radio" name="rating" id="rating-2">
-                                          <label for="rating-2" class="my-auto"></label>
-                                          <input type="radio" name="rating" id="rating-1">
-                                          <label for="rating-1" class="my-auto"></label>
-                                      </div>
+                                            <input type="radio" name="rating" id="rating-5">
+                                            <label for="rating-5" class="my-auto"></label>
+                                            <input type="radio" name="rating" id="rating-4">
+                                            <label for="rating-4" class="my-auto"></label>
+                                            <input type="radio" name="rating" id="rating-3">
+                                            <label for="rating-3" class="my-auto"></label>
+                                            <input type="radio" name="rating" id="rating-2">
+                                            <label for="rating-2" class="my-auto"></label>
+                                            <input type="radio" name="rating" id="rating-1">
+                                            <label for="rating-1" class="my-auto"></label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -272,9 +200,7 @@
                         <span class="my-auto ">
                             <svg class="icon " viewBox="0 0 45 45 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                                 <circle cx="22.5 " cy="22.5 " r="22.5 " fill="#03A9F4 " />
-                                <path
-                                    d="M29.2148 24.875L30.0592 19.4457H24.7801V15.9225C24.7801 14.4371 25.5176 12.9893 27.8819 12.9893H30.2818V8.3668C30.2818 8.3668 28.1039 8 26.0217 8C21.6742 8 18.8325 10.6004 18.8325 15.3078V19.4457H14V24.875H18.8325V38H24.7801V24.875H29.2148Z "
-                                    fill="white " />
+                                <path d="M29.2148 24.875L30.0592 19.4457H24.7801V15.9225C24.7801 14.4371 25.5176 12.9893 27.8819 12.9893H30.2818V8.3668C30.2818 8.3668 28.1039 8 26.0217 8C21.6742 8 18.8325 10.6004 18.8325 15.3078V19.4457H14V24.875H18.8325V38H24.7801V24.875H29.2148Z " fill="white " />
                             </svg>
 
                         </span>
@@ -287,16 +213,14 @@
                         <span class="my-auto ">
                             <svg class="icon " viewBox="0 0 45 45 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                                 <circle cx="22.5 " cy="22.5 " r="22.5 " fill="#03A9F4 " />
-                                <path
-                                    d="M22.0029 16.3339C18.3139 16.3339 15.3383 19.3102 15.3383 23C15.3383 26.6898 18.3139 29.6661 22.0029 29.6661C25.6919 29.6661 28.6675 26.6898 28.6675 23C28.6675 19.3102 25.6919 16.3339 22.0029 16.3339ZM22.0029 27.3338C19.619
+                                <path d="M22.0029 16.3339C18.3139 16.3339 15.3383 19.3102 15.3383 23C15.3383 26.6898 18.3139 29.6661 22.0029 29.6661C25.6919 29.6661 28.6675 26.6898 28.6675 23C28.6675 19.3102 25.6919 16.3339 22.0029 16.3339ZM22.0029 27.3338C19.619
                             27.3338 17.67 25.3903 17.67 23C17.67 20.6097 19.6132 18.6662 22.0029 18.6662C24.3926 18.6662 26.3358 20.6097 26.3358 23C26.3358 25.3903 24.3868 27.3338 22.0029 27.3338ZM30.4946 16.0613C30.4946 16.9257 29.7986 17.6161 28.9401 17.6161C28.0759
                             17.6161 27.3856 16.9199 27.3856 16.0613C27.3856 15.2026 28.0817 14.5064 28.9401 14.5064C29.7986 14.5064 30.4946 15.2026 30.4946 16.0613ZM34.9086 17.6393C34.81 15.5565 34.3344 13.7116 32.8089 12.1916C31.2892 10.6715 29.4447 10.1958
                             27.3624 10.0914C25.2163 9.96954 18.7837 9.96954 16.6376 10.0914C14.5611 10.19 12.7166 10.6657 11.1911 12.1858C9.66559 13.7058 9.19576 15.5507 9.09136 17.6335C8.96955 19.7801 8.96955 26.2141 9.09136 28.3607C9.18996 30.4435 9.66559
                             32.2884 11.1911 33.8084C12.7166 35.3285 14.5553 35.8042 16.6376 35.9086C18.7837 36.0305 25.2163 36.0305 27.3624 35.9086C29.4447 35.81 31.2892 35.3343 32.8089 33.8084C34.3286 32.2884 34.8042 30.4435 34.9086 28.3607C35.0305 26.2141
                             35.0305 19.7859 34.9086 17.6393ZM32.1361 30.664C31.6837 31.8011 30.8078 32.6771 29.6651 33.1354C27.954 33.8142 23.8938 33.6576 22.0029 33.6576C20.112 33.6576 16.046 33.8084 14.3407 33.1354C13.2038 32.6829 12.3279 31.8069 11.8697
                             30.664C11.1911 28.9525 11.3477 24.8913 11.3477 23C11.3477 21.1087 11.1969 17.0417 11.8697 15.336C12.3221 14.1989 13.198 13.3229 14.3407 12.8646C16.0518 12.1858 20.112 12.3424 22.0029 12.3424C23.8938 12.3424 27.9598 12.1916 29.6651
-                            12.8646C30.802 13.3171 31.6779 14.1931 32.1361 15.336C32.8147 17.0475 32.6581 21.1087 32.6581 23C32.6581 24.8913 32.8147 28.9583 32.1361 30.664Z "
-                                    fill="white " />
+                            12.8646C30.802 13.3171 31.6779 14.1931 32.1361 15.336C32.8147 17.0475 32.6581 21.1087 32.6581 23C32.6581 24.8913 32.8147 28.9583 32.1361 30.664Z " fill="white " />
                             </svg>
 
                         </span>
@@ -307,8 +231,7 @@
 
                     <div class="col-12 text-white-75 row m-0 ">
                         <span class="my-auto ">
-                            <svg class="icon my-auto " viewBox="0 0 45 45 " fill="none "
-                                xmlns="http://www.w3.org/2000/svg ">
+                            <svg class="icon my-auto " viewBox="0 0 45 45 " fill="none " xmlns="http://www.w3.org/2000/svg ">
                                 <circle cx="22.5 " cy="22.5 " r="22.5 " fill="#03A9F4 " />
                                 <path d="M32.3274 16.705C32.3439 16.936 32.3439 17.167 32.3439 17.398C32.3439 24.4423 26.9823 32.5591 17.1827 32.5591C14.1637 32.5591 11.3591 31.6847 9 30.167C9.42895 30.2165 9.84134 30.233 10.2868 30.233C12.7779 30.233
                             15.0711 29.3916 16.9023 27.9563C14.5596 27.9068 12.5964 26.3726 11.92 24.2609C12.25 24.3104 12.5799 24.3434 12.9264 24.3434C13.4048 24.3434 13.8833 24.2773 14.3287 24.1619C11.8871 23.667 10.0558 21.5223 10.0558 18.9322V18.8662C10.7652

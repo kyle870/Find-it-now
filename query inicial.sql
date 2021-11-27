@@ -19,13 +19,6 @@ create table if not exists `password_reset`(
     `reset_hash` varchar(255) NOT NULL,
     `reset_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-create table if not exists `departamento`(
-    `id_departamento` int(11) primary key NOT NULL,
-    `nombre_dep` varchar(50)
-);
-/*insert into `accounts`(`id_usuario`,`nombre_usuario`, `contrasena`, `correo`, `activo`) values (UUID_SHORT(),'osmar87','programacion6','osmarquintero87@gmail.com',1);
-*/
 create table if not exists `announcements`(
     `id_ad` int(11) NOT NULL primary key auto_increment,
     `titulo` varchar(50) NOT NULL, 

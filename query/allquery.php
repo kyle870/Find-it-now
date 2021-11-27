@@ -50,3 +50,4 @@ $updateProfile = "UPDATE `accounts` SET `nombre`=:nombreCompleto,`fechaNac`=:fec
 $selectAnuncioIndividual = "SELECT * FROM announcements WHERE id_ad = :idanuncio";
 
 //$selectAnunciosLimitados = "SELECT * FROM announcements LIMIT $start, $limite";
+$eliminarAnuncioQuery = "DELETE FROM announcements WHERE id_ad = :idAnuncio";

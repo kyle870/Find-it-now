@@ -25,6 +25,7 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="./../Style/evo-calendar.midnight-blue.min.css">
     <link rel="stylesheet" href="./../Style/evo-calendar.css">
     <link rel="shortcut icon" href="./../Resources/icono.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <title>Mis Anuncios</title>
 </head>
@@ -108,7 +109,7 @@ if (!isset($_SESSION['user_id'])) {
                                     ?>
                                         <tr>
                                             <td>
-                                                <img class="img" src="<?php echo $dato->fotos?>">
+                                                <img class="img" src="<?php echo $dato->fotos ?>">
                                             </td>
                                             <td class="text-black"><?php echo $dato->titulo ?></td>
                                             <td class="text-black"><?php echo $dato->categoria ?></td>
@@ -117,11 +118,10 @@ if (!isset($_SESSION['user_id'])) {
                                             <!-- <td class="text-black">----</td> -->
                                             <td class="text-black"><?php echo $dato->horaPublicacion ?></td>
                                             <td class="text-black">
-                                                <button class="btn-edit cursor-pointer">
-                                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M24.3113 6.93872L22.0604 9.1897C21.8309 9.41919 21.4598 9.41919 21.2303 9.1897L15.8104 3.76978C15.5809 3.54028 15.5809 3.16919 15.8104 2.9397L18.0613 0.688721C18.9744 -0.224365 20.4588 -0.224365 21.3768 0.688721L24.3113 3.62329C25.2293 4.53638 25.2293 6.02075 24.3113 6.93872ZM13.8768 4.87329L1.05451 17.6956L0.0193508 23.6282C-0.122251 24.429 0.575992 25.1223 1.37677 24.9856L7.30939 23.9456L20.1317 11.1233C20.3611 10.8938 20.3611 10.5227 20.1317 10.2932L14.7117 4.87329C14.4774 4.6438 14.1063 4.6438 13.8768 4.87329ZM6.05939 16.5969C5.79083 16.3284 5.79083 15.8987 6.05939 15.6301L13.5789 8.1106C13.8475 7.84204 14.2772 7.84204 14.5457 8.1106C14.8143 8.37915 14.8143 8.80884 14.5457 9.07739L7.02619 16.5969C6.75763 16.8655 6.32794 16.8655 6.05939 16.5969ZM4.29669 20.7034H6.64044V22.4758L3.49103 23.0276L1.97248 21.509L2.52423 18.3596H4.29669V20.7034Z" fill="#03A9F4" />
-                                                    </svg>
-                                                </button>
+                                                <a class="btn btn-outline-success" href="anuncio=<?php echo $dato->id_ad ?>"><i class="fas fa-pencil-alt"></i></a>
+                                                <a class="btn btn-outline-danger" href="./../controllers/eliminarAnuncio.php?id=<?php echo $dato->id_ad ?>" onclick="return confirm('Seguro que deseas eliminar este anuncio?')"><i class="fas fa-trash"></i></a>
+                                                <!-- <button name="btnEdit"class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i></button> -->
+                                                <!-- <button name="btnEliminate"class="btn btn-outline-danger"><i class="fas fa-trash"></i></button> -->
                                             </td>
                                         </tr>
                                     <?php

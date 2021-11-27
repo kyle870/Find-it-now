@@ -1,4 +1,4 @@
-create database 'finditnow_db' CHARACTER SET 'UTF8' COLLATE 'utf8_general_ci';
+create database 'finditnow_db' CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
 /*-------------*/
 create table if not exists `accounts`(
     `id`int(11) primary key not null auto_increment,
@@ -12,13 +12,13 @@ create table if not exists `accounts`(
     `celular` int(8),
     `genero` varchar(10),
     `imgperfil` varchar(255)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 /*-------------*/
 create table if not exists `password_reset`(
     `user_id` int(11) NOT NULL primary key,
     `reset_hash` varchar(255) NOT NULL,
     `reset_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 create table if not exists `announcements`(
     `id_ad` int(11) NOT NULL primary key auto_increment,
     `titulo` varchar(50) NOT NULL, 
@@ -32,6 +32,6 @@ create table if not exists `announcements`(
     `fotos` varchar(255),
     `id_user` int(11) NOT NULL,
     CONSTRAINT FOREIGN KEY fk_user_ad (id_user) REFERENCES `accounts` (id)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 /*INSERT INTO `announcements` (`titulo`, `categoria`, `precio`, `cantidad`, `condicion`, `descricion`, `fotos`, `id_user`) VALUES (':titulo', ':categoria', ':precio', ':cantidad', ':condicion', ':descripcion', ':idUsuario')*/

@@ -144,11 +144,6 @@ if (!isset($_SESSION['user_id'])) {
                                         <input id="default-btn" class="custom-file-input" name="updateImagenAnuncio" type="file" accept="image/*">
                                         <label class="custom-file-label text-truncate" for="customFile"><i class="fas fa-cloud-upload-alt mx-2"></i>Elegir imagen para tu anuncio</label>
                                     </div>
-
-                                    <!-- <div id="containerButton" class=" w-100">
-                                        <button class="mt-3 btn btn-info btn-block " onclick="defaultBtnActive()" id="custom-btn"><i class="fas fa-cloud-upload-alt mx-2"></i>Cargar foto</button>
-                                        <input id="default-btn" type="file" hidden>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>

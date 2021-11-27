@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $descripcion = $_POST['inpPostAnuncioDesc'];
     $ubicacion = $_POST['selPostAnuncioUbicacion'];
     //fecha y hora
-    $fechaHora = date("Y/m/d H:i:s");
+    $fechaHora = date("Y-m-d H:i:s");
     //$fechaHora = date("Y/m/d h:i:sa"); anterior formato 
     //$fotos = $_POST[''];
     //variables para la imagen de perfil

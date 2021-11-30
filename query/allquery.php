@@ -51,3 +51,5 @@ $selectAnuncioIndividual = "SELECT * FROM announcements WHERE id_ad = :idanuncio
 
 //$selectAnunciosLimitados = "SELECT * FROM announcements LIMIT $start, $limite";
 $eliminarAnuncioQuery = "DELETE FROM announcements WHERE id_ad = :idAnuncio";
+
+$updateAnuncio = "UPDATE `announcements` SET `titulo`=:titulo,`categoria`=:categoria,`precio`=:precio,`cantidad`=:cantidad,`condicion`=:condicion,`descricion`=:descripcion,`ubicacion`=:ubicacion,`horaPublicacion`=:fechaHora,`fotos`=:fotos WHERE id_ad = :idAnuncio";

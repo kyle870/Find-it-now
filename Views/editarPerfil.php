@@ -21,7 +21,7 @@ require_once './../controllers/actualizarPerfil.php'
     <link rel="shortcut icon" href="./../Resources/icono.png" type="image/x-icon">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <title>Perfil</title>
+    <title>Editar Perfil</title>
 </head>
 
 <body class="bg-default ">
@@ -64,21 +64,22 @@ require_once './../controllers/actualizarPerfil.php'
                                 <div class="card-title w-100 items-in-row p-3">
                                     <label class="w-100 text-center m-auto font-18 text-bold"><?= $user['nombre_usuario']; ?></label>
                                 </div>
-                                <div id="cardBodyProfile" class="card-body row m-0 px-3">
-                                    <div class="row w-100 mx-auto m-0 p-0 col-sm-12 ">
+                                <div class="card-body row">
+                                    <div class="row mx-auto m-0 col-lg-4 col-md-6 col-sm-12 ">
                                         <?php if (!empty($message)) : ?>
                                             <label class="text-danger text-bold text-center font-18 w-100 m-0"><i class="fas fa-exclamation-triangle mx-2"></i><?= $message ?></label>
                                         <?php endif; ?>
                                         <?php if (!empty($messageSuccess)) : ?>
                                             <label class="text-success text-bold text-center font-18 w-100 m-0"><i class="fas fa-check mx-2"></i><?= $messageSuccess ?></label>
                                         <?php endif; ?>
+                                        <div id="image-profile" class="image mx-0 px-0 ">
+                                            <img class="img-thumbnail" id="previewImg" src="<?= $user['imgperfil']; ?>" height='100'>
+                                        </div>
                                         <div id="btnGroup-profile" class="row justify-content-center py-3 my-auto mx-auto">
-                                            <!-- <button id="primary_profile-btn" type="button" class="btn btn-success text-white cursor-pointer font-weight-bold m-2"><i class="fas fa-cloud-upload-alt mx-2"></i>Cargar foto de perfil</button> -->
                                             <div class="custom-file">
-                                                <input id="default-btn" class="custom-file-input" name="updateImagenPerfil" type="file" accept="image/*">
-                                                <label class="custom-file-label text-truncate" for="customFile"><i class="fas fa-cloud-upload-alt mx-2"></i>Elegir imagen de perfil</label>
+                                                <input id="default-btn" class="custom-file-input" name="updateImagenPerfil" type="file" accept="image/*" onchange="previewFile(this);">
+                                                <label class="custom-file-label text-truncate" for="customFile"><i class="fas fa-cloud-upload-alt mx-2"></i>Cambiar imagen de perfil</label>
                                             </div>
-                                            <!-- <button id="cancel-profile-btn" class="btn btn-outline-danger cursor-pointer font-weight-bold m-2"><i class="fas fa-trash mx-2"></i>Eliminar</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -297,6 +298,19 @@ require_once './../controllers/actualizarPerfil.php'
 
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
+        }
+        //cargar vista previa de imagen 
+        function previewFile(input) {
+            var file = $("input[type=file]").get(0).files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    $("#previewImg").attr("src", reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 </body>

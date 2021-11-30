@@ -47,16 +47,8 @@ if (!isset($_SESSION['user_id'])) {
                 <a href="./Contactanos.php" class="nav-item nav-link text-white">Contáctanos</a>
             </div>
             <div class="navbar-nav ml-auto">
-                <!-- Div del post del anuncio -->
-                <!-- <div class="button-primary mr-3">
-                    <a href="./CrearAnuncio.php" class="bg-transparent text-nowrap text-white text-decoration-none hover-none">Publicar Anuncio</a>
-                </div> -->
-                <!-- div contenedor de los botones -->
                 <div class="mr-3">
                     <div class="row button-secondary mx-auto w-100">
-                        <!-- <a href="./Login.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none pr-2 mr-2 border-right">Iniciar
-                            Sesión</a> -->
-                        <!-- <hr class="divider-v mx-3 my-0" style="  background: #000;  border: 1px solid rgba(255, 255, 255, 0.816);  "> -->
                         <a href="./Perfil.php" class="bg-transparent text-white-90 cursor-pointer text-decoration-none hover-none">Perfil</a>
                     </div>
                 </div>
@@ -118,10 +110,8 @@ if (!isset($_SESSION['user_id'])) {
                                             <!-- <td class="text-black">----</td> -->
                                             <td class="text-black"><?php echo $dato->horaPublicacion ?></td>
                                             <td class="text-black">
-                                                <a class="btn btn-outline-success" href="anuncio=<?php echo $dato->id_ad ?>"><i class="fas fa-pencil-alt"></i></a>
+                                                <a class="btn btn-outline-success" href="./../Views/editarAnuncio.php?id=<?php echo $dato->id_ad ?>"><i class="fas fa-pencil-alt"></i></a>
                                                 <a class="btn btn-outline-danger" href="./../controllers/eliminarAnuncio.php?id=<?php echo $dato->id_ad ?>" onclick="return confirm('Seguro que deseas eliminar este anuncio?')"><i class="fas fa-trash"></i></a>
-                                                <!-- <button name="btnEdit"class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i></button> -->
-                                                <!-- <button name="btnEliminate"class="btn btn-outline-danger"><i class="fas fa-trash"></i></button> -->
                                             </td>
                                         </tr>
                                     <?php

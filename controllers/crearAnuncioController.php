@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fechaHora = date("Y-m-d H:i:s");
     //$fechaHora = date("Y/m/d h:i:sa"); anterior formato 
     //$fotos = $_POST[''];
-    //variables para la imagen de perfil
+    //variables para la imagen del anuncio
     $directory = "./../Resources/AnunciosDestacados/";
     $updateImagenAnuncio = $directory . basename($_FILES["updateImagenAnuncio"]["name"]);
 

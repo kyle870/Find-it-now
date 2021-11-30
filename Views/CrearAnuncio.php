@@ -139,9 +139,11 @@ if (!isset($_SESSION['user_id'])) {
                                     <label class="w-100 text-center m-auto font-18 text-bold">Fotos</label>
                                 </div>
                                 <div class="card-body row m-0 px-3">
-
+                                    <div id="image-announcement" class="image mx-0 p-2 ">
+                                        <img class="img-thumbnail" id="previewImg" src="" height='100'>
+                                    </div>
                                     <div class="custom-file">
-                                        <input id="default-btn" class="custom-file-input" name="updateImagenAnuncio" type="file" accept="image/*">
+                                        <input id="default-btn" class="custom-file-input" name="updateImagenAnuncio" type="file" accept="image/*" onchange="previewFile(this);">
                                         <label class="custom-file-label text-truncate" for="customFile"><i class="fas fa-cloud-upload-alt mx-2"></i>Elegir imagen para tu anuncio</label>
                                     </div>
                                 </div>
@@ -309,6 +311,19 @@ if (!isset($_SESSION['user_id'])) {
 
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
+        }
+        //cargar vista previa de imagen 
+        function previewFile(input) {
+            var file = $("input[type=file]").get(0).files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    $("#previewImg").attr("src", reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 </body>

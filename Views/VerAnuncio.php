@@ -123,6 +123,7 @@ require_once './../controllers/cargarAnuncio.php';
                             <label class="w-100 text-center text-black text-bold">Detalles del producto</label>
                         </div>
                         <div class="card-body row m-0 pt-3">
+                            <label class="mb-3 col-12 text-black text-bold"> <?php echo $datosAnuncio->titulo; ?></label>
                             <p class="text-black-75 col-12 text-justify">
                                 <?php echo $datosAnuncio->descricion; ?>
                             </p>

@@ -21,7 +21,7 @@ create table if not exists `password_reset`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 create table if not exists `announcements`(
     `id_ad` int(11) NOT NULL primary key auto_increment,
-    `titulo` varchar(50) NOT NULL, 
+    `titulo` varchar(100) NOT NULL, 
     `categoria` varchar(30) NOT NULL,
     `precio` float(8) NOT NULL,
     `cantidad` int(8) NOT NULL,

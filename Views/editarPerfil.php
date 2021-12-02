@@ -116,7 +116,7 @@ require_once './../controllers/actualizarPerfil.php'
                                         <div class="claseDepartamento">
                                             <label for="selectorDepartamento" class="text-black-50 text-bold"><i class="fas fa-map-marker-alt mr-2"></i>Departamento</label>
                                             <select id="selectorDepartamento" name="updateDepartamento" class="form-component w-100 mb-4">
-                                                <option value="">Seleccione</option>
+                                                <option value="<?= $user['departamento']; ?>"><?= $user['departamento']; ?></option>
                                                 <option value="Boaco">Boaco</option>
                                                 <option value="Carazo">Carazo</option>
                                                 <option value="Chinandega">Chinandega</option>
@@ -139,7 +139,7 @@ require_once './../controllers/actualizarPerfil.php'
                                         <div class="claseGenero">
                                             <label for="selectorGenero" class="text-black-50 text-bold"><i class="fas fa-venus-mars mr-2"></i>Género</label>
                                             <select id="selectorGenero" name="updateGenero" class="form-component align-middle w-100 mb-4">
-                                                <option value="">Seleccione</option>
+                                                <option value="<?= $user['genero']; ?>"><?= $user['genero']; ?></option>
                                                 <option value="Hombre">Hombre</option>
                                                 <option value="Mujer">Mujer</option>
                                             </select>
